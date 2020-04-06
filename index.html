@@ -6,21 +6,139 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Trivia Application</title>
     <link rel="stylesheet" href="style/style.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
 </head>
 <body>
     <main>
-        <section class="main-pane">
+        <div class="main-pane">
+            
+            <div class="mid inny">
+     
+            </div>
 
-        </section>
-        <section class="side-pane">
-            <div class="participant-info">
-                <img src="" alt="" class="img">
-                <div class="info">
-                    <h1 class="participant-name">Apple Ball</h1>
-                    <h1 class="participant-score">1234</h1>
+        </div>
+
+        <aside class="side-pane">
+            <div class="bot">
+                <button title="Delete User Name">
+                    <span class="material-icons appear">
+                    delete
+                    </span>
+                </button>
+            </div>
+            <div class="top">
+                <h2>Gaurav Ghimire</h2>
+                <h3>100</h3>
+            </div>
+            <div class="bottom">
+                <div class="participant-info">
+                    <img src="assets/bg1.png" width="200" height="200" alt="" class="participant-image">
+                    <div class="info">
+                        <h1 class="participant-name">Apple Ball</h1>
+                        <h2 class="participant-score">1234</h2>
+                    </div>
+                </div>
+                <div class="participant-info">
+                    <img src="assets/bg1.png" width="200" height="200" alt="" class="participant-image">
+                    <div class="info">
+                        <h1 class="participant-name">Apple Ball</h1>
+                        <h1 class="participant-score">1234</h1>
+                    </div>
+                </div>
+                <div class="participant-info">
+                    <img src="assets/bg1.png" width="200" height="200" alt="" class="participant-image">
+                    <div class="info">
+                        <h1 class="participant-name">Apple Ball</h1>
+                        <h1 class="participant-score">1234</h1>
+                    </div>
+                </div>
+                <div class="participant-info">
+                    <img src="assets/bg1.png" width="200" height="200" alt="" class="participant-image">
+                    <div class="info">
+                        <h1 class="participant-name">Apple Ball</h1>
+                        <h1 class="participant-score">1234</h1>
+                    </div>
+                </div>
+                <div class="participant-info">
+                    <img src="assets/bg1.png" width="200" height="200" alt="" class="participant-image">
+                    <div class="info">
+                        <h1 class="participant-name">Apple Ball</h1>
+                        <h1 class="participant-score">1234</h1>
+                    </div>
                 </div>
             </div>
-        </section>
+        </aside>
+
+        <template id="trivia">
+            <section class="question-no">
+                <h1>Question 1</h1>
+            </section>
+            <section class="question">
+                <h1>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eum quod culpa dignissimos optio sunt a, architecto, iure blanditiis ullam delectus nihil quas?</h1>
+            </section>
+            <div class="answers">
+                <div class="answer" id="ans1">
+                    <p>Lorem, ipsum.</p>
+                </div>
+                <div class="answer" id="ans2">
+                    <p>Lorem, ipsum.</p>
+                </div>
+                <div class="answer" id="ans3">
+                    <p>Lorem, ipsum.</p>
+                </div>
+                <div class="answer" id="ans4">
+                    <p>Lorem, ipsum.</p>
+                </div>
+            </div>
+            <div class="next">
+                <button id="qnext">NEXT</button>
+            </div>
+        </template>
     </main>
+
+    <script>
+        window.onload = function(){
+            var mid = document.querySelector(".mid")
+            var template = document.querySelector('template');
+            var clone = document.importNode(template.content, true)
+            mid.appendChild(clone)
+
+            var next = document.querySelector("#qnext")
+
+            next.addEventListener('click', () => {
+                // alert("adjis")
+                document.querySelector(".question").classList.toggle("outy")
+                setTimeout(()=> {
+                    document.querySelector(".question").classList.remove("outy")
+                    document.querySelector(".question").classList.toggle("inny")
+                    setTimeout(()=> {
+                        document.querySelector(".question").classList.remove("inny")
+                    }, 500)
+                }, 500)
+
+            })
+
+            // next.addEventListener('mousedown', () => {
+            //     // alert("adjis")
+            //     document.querySelector(".question").classList.toggle("outy")
+            //     setTimeout(()=> {
+            //         document.querySelector(".question").classList.remove("outy")
+            //     }, 5009)
+            // })
+
+            // next.addEventListener('mouseup', () => {
+            //     // alert("adjis")
+            //     document.querySelector(".question").classList.toggle("inny")
+            //     setTimeout(()=> {
+            //         document.querySelector(".question").classList.remove("inny")
+            //     }, 5000)
+            // })
+            
+
+
+        }
+
+    </script>
 </body>
 </html>
