@@ -28,7 +28,8 @@
                 </button>
             </div>
             <div class="top">
-                <h2>Gaurav Ghimire</h2>
+                
+                <h2>Enter User Name</h2>
                 <h3>100</h3>
             </div>
             <div class="bottom">
@@ -95,48 +96,88 @@
                 <button id="qnext">NEXT</button>
             </div>
         </template>
+
+        <template id="formmer">
+            <form id="name_form">
+                <label for="name">UserName</label>
+                <input type="text" id="name" required value="">
+                <button type="submit">
+                    <span class="material-icons">
+                        save
+                    </span>
+                    <!-- save -->
+                </button>
+            </form>
+        </template>
     </main>
 
     <script>
         window.onload = function(){
             var mid = document.querySelector(".mid")
-            var template = document.querySelector('template');
-            var clone = document.importNode(template.content, true)
+            var nam = document.querySelector(".top > h2")
+
+            var trivia = document.querySelector('#trivia');
+            var clone = document.importNode(trivia.content, true)
+
             mid.appendChild(clone)
 
+            var form = document.querySelector("#formmer")
+            var fclone = document.importNode(form.content, true)
+
             var next = document.querySelector("#qnext")
+
+            // temporary next question and answer animation logic
 
             next.addEventListener('click', () => {
                 // alert("adjis")
                 document.querySelector(".question").classList.toggle("outy")
+                document.querySelector(".answers").classList.toggle("flippy")
                 setTimeout(()=> {
                     document.querySelector(".question").classList.remove("outy")
                     document.querySelector(".question").classList.toggle("inny")
                     setTimeout(()=> {
                         document.querySelector(".question").classList.remove("inny")
-                    }, 500)
-                }, 500)
+                        document.querySelector(".answers").classList.remove("flippy")
+                    }, 850)
+                }, 600)
 
             })
 
-            // next.addEventListener('mousedown', () => {
-            //     // alert("adjis")
-            //     document.querySelector(".question").classList.toggle("outy")
-            //     setTimeout(()=> {
-            //         document.querySelector(".question").classList.remove("outy")
-            //     }, 5009)
-            // })
+            document.querySelector(".bot > button").addEventListener("click", e => {
+                if(localStorage.getItem('User Name') != null){
+                    var formt = document.querySelector("#formmer")
+                    var fclonet = document.importNode(formt.content, true)
 
-            // next.addEventListener('mouseup', () => {
-            //     // alert("adjis")
-            //     document.querySelector(".question").classList.toggle("inny")
-            //     setTimeout(()=> {
-            //         document.querySelector(".question").classList.remove("inny")
-            //     }, 5000)
-            // })
+                    nam.parentNode.prepend(fclonet)
+                    localStorage.removeItem("User Name")
+                    nam.innerText = "Enter User Name"
+
+                    form_submit()
+                }
+            })
+
+            // display username is exist else fill the form that will be removed after the username is entered
+            if(localStorage.getItem('User Name') != null){
+                document.querySelector(".top > h2").innerText = localStorage.getItem('User Name')
+            } else{
+                nam.parentNode.prepend(fclone)
+                form_submit()
+            }
+            // delete the username
             
 
+        }
 
+        // function to help with repetitive code
+        function form_submit(){
+            var dom_from = document.querySelector(".top > form")
+            dom_from.addEventListener("submit", e => {
+                e.preventDefault();
+                var name = dom_from.querySelector("#name").value
+                localStorage.setItem("User Name",name)
+                document.querySelector(".top > h2").innerText = localStorage.getItem('User Name')
+                dom_from.remove()
+            })
         }
 
     </script>

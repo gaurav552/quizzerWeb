@@ -5,6 +5,7 @@
     box-sizing: border-box;
 }
 
+
 :root {
     /* Base font size */
     font-size: 10px;   
@@ -23,6 +24,18 @@
     }
     100% {
       transform: scale(1) rotateZ(360deg);
+    }
+  }
+
+  @keyframes flip-vertical-right {
+    0% {
+      transform: rotateY(0);
+    }
+    50% {
+      transform: rotateY(180deg);
+    }
+    100%{
+        transform: rotateY(360deg);
     }
   }
 
@@ -107,6 +120,9 @@ main{
     animation: slide-in-right 0.9s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }
 
+.flippy {
+	animation: flip-vertical-right 1.2s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
+}
 
 .main-pane > .mid {
     padding-top: 6rem;
@@ -153,7 +169,7 @@ main{
     height: 12rem;
     width: 33rem;
     margin: 1rem 1rem;
-    border-radius: 1rem;
+    border-radius: 2rem;
     padding: 2rem;
     box-shadow: 0 1px 15px rgba(0,0,0,.04), 0 1px 6px rgba(0,0,0,.04);
 }
@@ -203,6 +219,51 @@ main{
     animation: slide-in-left 0.9s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }
 
+.side-pane > .top > #name_form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    font-size: 2rem;
+}
+
+.side-pane > .top > #name_form > label{
+    font-size: 2rem;
+    padding-right: 1rem;
+}
+.side-pane > .top > #name_form > #name{
+    font-size: 2rem;
+    border: none;
+    height: 4rem;
+    box-shadow: 0 0px 20px rgba(0,0,0,.1), 0 0px 10px rgba(0,0,0,.1);
+    border-radius: 2rem;
+}
+
+.side-pane > .top > #name_form > button{
+    margin-left: 2rem;
+    width: 5rem;
+    height: 5rem;
+    text-transform: uppercase;
+    background: #fff;
+    border: none;
+    border-radius: 50%;
+    box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.25);
+    letter-spacing: .15rem;
+}
+
+.side-pane > .top > #name_form > button:active{
+    box-shadow: 0px 0px 16px 0px rgba(0,0,0,0.15);
+}
+
+.side-pane > .top > #name_form > button:hover{
+    animation: rotate-scale-up 0.65s linear both;
+}
+
+.side-pane > .top > #name_form > button:focus{
+    outline: none;
+    border: 0.3rem solid rgba(255,0,0,0.25);
+}
+
 .side-pane > .bot{
     position: absolute;
     margin: 5rem 3rem;
@@ -215,7 +276,7 @@ main{
     background-color: #fff;
     border: none;
     border-radius: 50%;
-    box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.25);
+    box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.25);
     /* animation:  rotate-scale-up 0.9s cubic-bezier(0.250, 0.460, 0.450, 0.940) both; */
 }
 
@@ -268,7 +329,7 @@ main{
     background-color: #fff;
     margin: 1.2rem 3rem;
     padding: 1.5rem;
-    border-radius: 0.7rem;
+    border-radius: 2rem;
     box-shadow: 0px 0px 7px 1px rgba(0,0,0,0.15);
 }
 
