@@ -121,13 +121,9 @@
 
             mid.appendChild(clone)
 
-            var form = document.querySelector("#formmer")
-            var fclone = document.importNode(form.content, true)
-
             var next = document.querySelector("#qnext")
 
-            // temporary next question and answer animation logic
-
+            // temporary next question and answer, animation logic
             next.addEventListener('click', () => {
                 // alert("adjis")
                 document.querySelector(".question").classList.toggle("outy")
@@ -143,40 +139,44 @@
 
             })
 
-            document.querySelector(".bot > button").addEventListener("click", e => {
-                if(localStorage.getItem('User Name') != null){
-                    var formt = document.querySelector("#formmer")
-                    var fclonet = document.importNode(formt.content, true)
-
-                    nam.parentNode.prepend(fclonet)
-                    localStorage.removeItem("User Name")
-                    nam.innerText = "Enter User Name"
-
-                    form_submit()
-                }
-            })
-
-            // display username is exist else fill the form that will be removed after the username is entered
+            // display username if exist else fill the form that will be removed after the username is entered
             if(localStorage.getItem('User Name') != null){
                 document.querySelector(".top > h2").innerText = localStorage.getItem('User Name')
             } else{
                 nam.parentNode.prepend(fclone)
                 form_submit()
             }
+
             // delete the username
-            
+            document.querySelector(".bot > button").addEventListener("click", e => {
+                if(localStorage.getItem('User Name') != null){
+                    var formt = document.querySelector("#formmer")
+                    var fclonet = document.importNode(formt.content, true)
+                    fclonet.querySelector("#name_form").classList.add("inny2")
+                    nam.parentNode.prepend(fclonet)
+                    localStorage.removeItem("User Name")
+                    nam.innerText = "Enter User Name"
+                    form_submit()
+                }
+            })
 
         }
 
         // function to help with repetitive code
         function form_submit(){
             var dom_from = document.querySelector(".top > form")
+            
             dom_from.addEventListener("submit", e => {
+                dom_from.classList.remove("inny2")
                 e.preventDefault();
+                dom_from.classList.add("outy")
                 var name = dom_from.querySelector("#name").value
                 localStorage.setItem("User Name",name)
                 document.querySelector(".top > h2").innerText = localStorage.getItem('User Name')
-                dom_from.remove()
+                setTimeout(() => {
+                    dom_from.classList.remove("outy")
+                    dom_from.remove()
+                }, 400)
             })
         }
 

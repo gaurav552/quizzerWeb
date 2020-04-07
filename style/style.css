@@ -120,6 +120,10 @@ main{
     animation: slide-in-right 0.9s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }
 
+.inny2{
+    animation: slide-in-left 0.9s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
 .flippy {
 	animation: flip-vertical-right 1.2s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
 }
@@ -191,7 +195,7 @@ main{
     color: #3a3a3a;
     font-size: 1.5rem;
     font-weight: 700;
-    border-radius: 2rem;
+    border-radius: 1.4rem;
     width: 20rem;
     height: 5rem;
     transition: box-shadow 0.3s, color 0.3s ease-in-out;
@@ -217,51 +221,6 @@ main{
     background-color: #fff;;
     box-shadow: 0 3px 30px rgba(0,0,0,.1), 0 3px 20px rgba(0,0,0,.1);
     animation: slide-in-left 0.9s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-}
-
-.side-pane > .top > #name_form{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    font-size: 2rem;
-}
-
-.side-pane > .top > #name_form > label{
-    font-size: 2rem;
-    padding-right: 1rem;
-}
-.side-pane > .top > #name_form > #name{
-    font-size: 2rem;
-    border: none;
-    height: 4rem;
-    box-shadow: 0 0px 20px rgba(0,0,0,.1), 0 0px 10px rgba(0,0,0,.1);
-    border-radius: 2rem;
-}
-
-.side-pane > .top > #name_form > button{
-    margin-left: 2rem;
-    width: 5rem;
-    height: 5rem;
-    text-transform: uppercase;
-    background: #fff;
-    border: none;
-    border-radius: 50%;
-    box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.25);
-    letter-spacing: .15rem;
-}
-
-.side-pane > .top > #name_form > button:active{
-    box-shadow: 0px 0px 16px 0px rgba(0,0,0,0.15);
-}
-
-.side-pane > .top > #name_form > button:hover{
-    animation: rotate-scale-up 0.65s linear both;
-}
-
-.side-pane > .top > #name_form > button:focus{
-    outline: none;
-    border: 0.3rem solid rgba(255,0,0,0.25);
 }
 
 .side-pane > .bot{
@@ -301,6 +260,59 @@ main{
     margin: 4rem 2rem;
     color: #131113;
     min-height: 50%;
+    /* transition: 0.7s ease-in-out; */
+}
+
+.side-pane > .top > #name_form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    font-size: 2rem;
+}
+
+.side-pane > .top > #name_form > label{
+    font-size: 2rem;
+    padding-right: 1rem;
+}
+
+.side-pane > .top > #name_form > #name{
+    font-size: 2rem;
+    border: none;
+    height: 4rem;
+    box-shadow: 0 0px 20px rgba(0,0,0,.1), 0 0px 10px rgba(0,0,0,.1);
+    border-radius: 2rem;
+    padding: 2rem;
+}
+
+.side-pane > .top > #name_form > #name:focus{
+    outline: none;
+    border: 0.3rem solid rgba(255,0,0,0.25);
+}
+
+.side-pane > .top > #name_form > button{
+    margin-left: 2rem;
+    width: 5rem;
+    height: 5rem;
+    text-transform: uppercase;
+    background: #fff;
+    border: none;
+    border-radius: 50%;
+    box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.25);
+    letter-spacing: .15rem;
+}
+
+.side-pane > .top > #name_form > button:active{
+    box-shadow: 0px 0px 16px 0px rgba(0,0,0,0.15);
+}
+
+.side-pane > .top > #name_form > button:hover{
+    animation: rotate-scale-up 0.65s linear both;
+}
+
+.side-pane > .top > #name_form > button:focus{
+    outline: none;
+    border: 0.3rem solid rgba(255,0,0,0.25);
 }
 
 .side-pane > .top > h2{
