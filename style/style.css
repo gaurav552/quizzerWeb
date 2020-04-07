@@ -15,6 +15,17 @@
       width: 100%;
       padding-top: 61.8%;
   } */
+
+
+  @keyframes colorify{
+    0%{
+        box-shadow: none;
+    }
+    100%{
+        box-shadow:8px 8px 17px -6px rgba(250, 0, 0, 0.23) inset, -8px -8px 17px -6px rgba(250,0,0,.23) inset;
+    }
+  }
+
 @keyframes rotate-scale-up {
     0% {
       transform: scale(1) rotateZ(0);
@@ -176,15 +187,19 @@ main{
     border-radius: 2rem;
     padding: 2rem;
     box-shadow: 0 1px 15px rgba(0,0,0,.04), 0 1px 6px rgba(0,0,0,.04);
+
+}
+
+.main-pane > .mid > .answers > .answer:hover{
+    box-shadow: 0 1px 15px rgba(250,0,0,.1), 0 1px 6px rgba(250,0,0,.1);
 }
 
 .main-pane > .mid > .answers > .set{
-    box-shadow:4px 4px 4px 0px #d1d9e6 inset,
-    -4px -4px 4px 0px #ffffff inset;
+    animation: colorify .2s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
 }
 
 .main-pane > .mid > .answers > p{
-    font-size: 1.7rem;
+    font-size: 1.5rem;
     color: #3a3a3a;;
     text-align: center;
 }
@@ -207,11 +222,11 @@ main{
     letter-spacing: .15rem;
 }
 
-/* .main-pane > .mid > .next >button:hover{
-    color: #f22d3f;
-} */
+.main-pane > .mid > .next >button:hover{
+    box-shadow: 0 1px 18px rgba(250,0,0,.1), 0 1px 15px rgba(250,0,0,.1);
+}
 .main-pane > .mid > .next >button:active{
-    box-shadow: 0px 0px 16px 0px rgba(0,0,0,0.15);
+    box-shadow: 0 1px 1px rgba(250,0,0,.1), 0 1px 1px rgba(250,0,0,.1);
 }
 .main-pane > .mid > .next >button:focus{
     outline: none;
@@ -245,7 +260,7 @@ main{
 }
 
 .side-pane > .bot > button:hover{
-    animation: rotate-scale-up 0.65s linear both;
+    animation: rotate-scale-up 0.9s cubic-bezier(0.35, -0.41, 0.71, 1.58) both;
 }
 
 .side-pane > .bot > button:focus{
@@ -312,7 +327,7 @@ main{
 }
 
 .side-pane > .top > #name_form > button:hover{
-    animation: rotate-scale-up 0.65s linear both;
+    animation: rotate-scale-up 0.9s cubic-bezier(0.35, -0.41, 0.71, 1.58) both;
 }
 
 .side-pane > .top > #name_form > button:focus{
