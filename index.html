@@ -79,18 +79,18 @@
                 <h1>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eum quod culpa dignissimos optio sunt a, architecto, iure blanditiis ullam delectus nihil quas?</h1>
             </section>
             <div class="answers">
-                <div class="answer" id="ans1">
-                    <p>Lorem, ipsum.</p>
-                </div>
-                <div class="answer" id="ans2">
-                    <p>Lorem, ipsum.</p>
-                </div>
-                <div class="answer" id="ans3">
-                    <p>Lorem, ipsum.</p>
-                </div>
-                <div class="answer" id="ans4">
-                    <p>Lorem, ipsum.</p>
-                </div>
+                <p class="answer" onclick="answer(event)" id="ans1">
+                    Lorem, ipsum.
+                </p>
+                <p class="answer" onclick="answer(event)" id="ans2">
+                    Lorem, ipsum.
+                </p>
+                <p class="answer" onclick="answer(event)" id="ans3">
+                    Lorem, ipsum.
+                </p>
+                <p class="answer" onclick="answer(event)" id="ans4">
+                    Lorem, ipsum.
+                </p>
             </div>
             <div class="next">
                 <button id="qnext">NEXT</button>
@@ -128,6 +128,9 @@
                 // alert("adjis")
                 document.querySelector(".question").classList.toggle("outy")
                 document.querySelector(".answers").classList.toggle("flippy")
+                if(document.querySelector(".answers > .set") != null){
+                    document.querySelector(".answers > .set").classList.remove("set")
+                }
                 setTimeout(()=> {
                     document.querySelector(".question").classList.remove("outy")
                     document.querySelector(".question").classList.toggle("inny")
@@ -159,7 +162,19 @@
                     form_submit()
                 }
             })
+        }
 
+        function answer(e){
+            // debugger
+            if(document.querySelector(".answers > .set") != null){
+                document.querySelector(".answers > .set").classList.remove("set")
+                if(document.querySelector(".answers > .set") != e.target){
+                    e.target.classList.add("set")
+                }
+            } else{
+                e.target.classList.add("set")
+            }
+            
         }
 
         // function to help with repetitive code
