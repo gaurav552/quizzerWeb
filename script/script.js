@@ -29,7 +29,6 @@ window.onload = function(){
                 document.querySelector(".answers").classList.remove("flippy")
             }, 850)
         }, 600)
-
     })
 
     // display username if exist else fill the form that will be removed after the username is entered
