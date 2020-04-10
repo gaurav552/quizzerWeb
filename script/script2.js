@@ -131,6 +131,14 @@ function api_config(e) {
             el.classList.toggle("hider")
             el.classList.add("inny")
         })
+
+        setTimeout(()=>{
+            game_customize.classList.remove("inny")
+            document.querySelectorAll(".remove_on_setting").forEach(el => {
+                el.classList.remove("inny")
+            })
+        },900)
+
     },300)
 
 }

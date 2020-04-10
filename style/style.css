@@ -153,11 +153,13 @@ option{
     margin: 5rem 5rem;
     top: 0;
     left: 0;
+    z-index: 2;
 }
 
 .round{
     display: flex;
     justify-content: center;
+    align-items: center;
     margin: 1rem;
     border-radius: 50%;
     background: #fff;
