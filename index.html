@@ -1,27 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Trivia Application</title>
+    <link rel="stylesheet" href="style/additional.css">
     <link rel="stylesheet" href="style/style.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
-    <script defer src="script/script.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script defer src="script/script2.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/peerjs@0.3.20/dist/peer.min.js"></script>
 
 </head>
+
 <body>
     <main>
         <div class="main-pane">
-            
-            <div class="mid">
-     
+
+            <div class="overlay">
+                <div class="overlay-display">
+                    <button disabled>Start</button>
+                    <p class="warner">
+                        Enter User Name to Start
+                    </p>
+                </div>
+            </div>
+
+            <div class="qna">
+
             </div>
 
         </div>
 
         <aside class="side-pane">
-            <div class="bot">
+            <div class="del">
                 <button title="Delete User Name">
                     <span class="material-icons appear">
                     delete
@@ -29,45 +42,49 @@
                 </button>
             </div>
             <div class="top">
-                
                 <h2>Enter User Name</h2>
                 <h3>100</h3>
             </div>
             <div class="bottom">
-                <div class="participant-info">
-                    <img src="assets/bg1.png" width="200" height="200" alt="" class="participant-image">
-                    <div class="info">
-                        <h1 class="participant-name">Apple Ball</h1>
-                        <h2 class="participant-score">1234</h2>
+                <div class="left">
+                    <div class="participant-info">
+                        <!-- <img src="assets/bg1.png" width="200" height="200" alt="" class="participant-image"> -->
+                        <div class="info">
+                            <h1 class="participant-name">Apple Ball</h1>
+                            <h2 class="participant-score">1234</h2>
+                        </div>
+                    </div>
+                    <div class="participant-info">
+                        <!-- <img src="assets/bg1.png" width="200" height="200" alt="" class="participant-image"> -->
+                        <div class="info">
+                            <h1 class="participant-name">Apple Ball</h1>
+                            <h1 class="participant-score">1234</h1>
+                        </div>
+                    </div>
+                    <div class="participant-info">
+                        <!-- <img src="assets/bg1.png" width="200" height="200" alt="" class="participant-image"> -->
+                        <div class="info">
+                            <h1 class="participant-name">Apple Ball</h1>
+                            <h1 class="participant-score">1234</h1>
+                        </div>
+                    </div>
+                    <div class="participant-info">
+                        <!-- <img src="assets/bg1.png" width="200" height="200" alt="" class="participant-image"> -->
+                        <div class="info">
+                            <h1 class="participant-name">Apple Ball</h1>
+                            <h1 class="participant-score">1234</h1>
+                        </div>
+                    </div>
+                    <div class="participant-info">
+                        <!-- <img src="assets/bg1.png" width="200" height="200" alt="" class="participant-image"> -->
+                        <div class="info">
+                            <h1 class="participant-name">Apple Ball</h1>
+                            <h1 class="participant-score">1234</h1>
+                        </div>
                     </div>
                 </div>
-                <div class="participant-info">
-                    <img src="assets/bg1.png" width="200" height="200" alt="" class="participant-image">
-                    <div class="info">
-                        <h1 class="participant-name">Apple Ball</h1>
-                        <h1 class="participant-score">1234</h1>
-                    </div>
-                </div>
-                <div class="participant-info">
-                    <img src="assets/bg1.png" width="200" height="200" alt="" class="participant-image">
-                    <div class="info">
-                        <h1 class="participant-name">Apple Ball</h1>
-                        <h1 class="participant-score">1234</h1>
-                    </div>
-                </div>
-                <div class="participant-info">
-                    <img src="assets/bg1.png" width="200" height="200" alt="" class="participant-image">
-                    <div class="info">
-                        <h1 class="participant-name">Apple Ball</h1>
-                        <h1 class="participant-score">1234</h1>
-                    </div>
-                </div>
-                <div class="participant-info">
-                    <img src="assets/bg1.png" width="200" height="200" alt="" class="participant-image">
-                    <div class="info">
-                        <h1 class="participant-name">Apple Ball</h1>
-                        <h1 class="participant-score">1234</h1>
-                    </div>
+                <div class="right">
+                    <h1>chatbox Here</h1>
                 </div>
             </div>
         </aside>
@@ -99,7 +116,7 @@
         </template>
 
         <template id="formmer">
-            <form id="name_form">
+            <form id="name_form" class="inny2">
                 <label for="name">UserName</label>
                 <input type="text" id="name" required value="">
                 <button type="submit">
@@ -108,9 +125,27 @@
                     </span>
                     <!-- save -->
                 </button>
+                
+            <script>
+                document.querySelector("#name_form").addEventListener("submit", e => {
+                    document.querySelector("#name_form").classList.remove("inny2")
+                    e.preventDefault()
+                    localStorage.setItem("User Name", document.querySelector("#name_form").querySelector("#name").value)
+                    document.querySelector(".top > h2").innerHTML = localStorage.getItem("User Name")
+                    document.querySelector("#name_form").classList.add("outy2")
+                    get_q.disabled = false
+                    warner.classList.add("outy3")
+                    setTimeout(() => {
+                        warner.classList.remove("outy3")
+                        warner.setAttribute("style","display:none")
+                        document.querySelector("#name_form").parentNode.removeChild(document.querySelector("#name_form"))
+                    }, 900)
+                })
+            </script>
             </form>
         </template>
     </main>
 
 </body>
+
 </html>
