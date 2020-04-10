@@ -81,6 +81,24 @@
     }
 }
 
+@keyframes rotate_plus {
+    from {
+        transform: rotate(0);
+    }
+    to {
+        transform: rotate(180deg);
+    }
+}
+
+@keyframes rotate_minus {
+    from {
+        transform: rotate(0);
+    }
+    to {
+        transform: rotate(-180deg);
+    }
+}
+
 @keyframes fade-in {
     0% {
         opacity: 0;
@@ -131,4 +149,17 @@
 
 .flippy {
     animation: flip-vertical-right 1.2s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
+}
+
+.hider{
+    display: none!important;
+    animation: fade-out 0.9s ease-out;
+}
+
+.rotater {
+    animation: rotate_plus 0.9s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+.rotater1 {
+    animation: rotate_minus 0.9s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }

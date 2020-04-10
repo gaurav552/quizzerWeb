@@ -53,7 +53,47 @@ main {
     height: 100%;
 }
 
-.main-pane>.overlay>.overlay-display>button {
+.main-pane>.overlay>.overlay-display>.game-customize{
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    align-items: center;
+    margin: 3rem;
+}
+
+.game-customize > .form-input{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    margin: 2rem;
+}
+
+.game-customize > .form-input > label{
+    margin: 2rem;
+}
+
+.game-customize > .form-input > select, input{
+    font-size: 2rem;
+    box-shadow: 0 0px 10px 3px rgba(0,0,0, 0.1);
+    border-radius: 2rem;
+    border: none;
+    padding: 1.4rem 2rem;
+    outline: none;
+    /* width: 20rem; */
+}
+
+option{
+    padding: 0.7rem 1rem;
+    outline: none;
+}
+
+.game-customize > .form-input > input{
+    transition: all 0.5s ease-in;
+}
+
+.main-pane>.overlay>.overlay-display>.buttons>.start>button {
     background: #fff;
     border: none;
     font-size: 1.6rem;
@@ -64,20 +104,20 @@ main {
     transition: box-shadow 0.2s, background 0.3s ease-in-out;
 }
 
-.main-pane>.overlay>.overlay-display>button:disabled {
+.main-pane>.overlay>.overlay-display>.buttons>.start>button:disabled {
     background: rgba(0, 0, 0, 0.15);
 }
 
-.main-pane>.overlay>.overlay-display>button:focus {
+.main-pane>.overlay>.overlay-display>.buttons>.start>button:focus {
     outline: none;
     border: 2px solid rgba(255, 0, 0, 0.15);
 }
 
-.main-pane>.overlay>.overlay-display>button:hover:enabled {
+.main-pane>.overlay>.overlay-display>.buttons>.start>button:hover:enabled {
     box-shadow: 0 0 25px rgba(250, 0, 0, .1), 0 0 16px rgba(250, 0, 0, .16);
 }
 
-.main-pane>.overlay>.overlay-display>button:active:enabled {
+.main-pane>.overlay>.overlay-display>.buttons>.start>button:active:enabled {
     box-shadow: 0 1px 1px rgba(250, 0, 0, .1), 0 1px 1px rgba(250, 0, 0, .1);
 }
 
@@ -85,6 +125,15 @@ main {
     background: rgba(250, 0, 0, .6);
     color: white;
 }
+
+.main-pane>.overlay>.overlay-display>.buttons>.settings{
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    margin: 1rem;
+    /* padding: 1rem; */
+}
+
 
 .main-pane>.overlay>.overlay-display>p {
     font-size: 2rem;
@@ -97,6 +146,43 @@ main {
     min-height: 60vh;
     animation: slide-in-right 0.9s cubic-bezier(0.1, 0.72, 0.86, 0.2) both;
     /*  */
+}
+
+.main-pane>.end-attempt{
+    position: absolute;
+    margin: 5rem 5rem;
+    top: 0;
+    left: 0;
+}
+
+.round{
+    display: flex;
+    justify-content: center;
+    margin: 1rem;
+    border-radius: 50%;
+    background: #fff;
+    border: none;
+    height: 5rem;
+    width: 5rem;
+    box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.25);
+    transition: all 0.2s ease-in-out;
+}
+
+.round:disabled {
+    background: rgba(0, 0, 0, 0.15);
+}
+
+.round:focus {
+    outline: none;
+    border: 2px solid rgba(255, 0, 0, 0.15);
+}
+
+.round:hover:enabled {
+    box-shadow: 0 0 25px rgba(250, 0, 0, .1), 0 0 16px rgba(250, 0, 0, .16);
+}
+
+.round:active:enabled {
+    box-shadow: 0 1px 1px rgba(250, 0, 0, .1), 0 1px 1px rgba(250, 0, 0, .1);
 }
 
 .main-pane>.qna>.question-no {
@@ -206,28 +292,6 @@ main {
     /* padding: 1rem 2rem; */
 }
 
-.side-pane>.del>button {
-    width: 5rem;
-    height: 5rem;
-    background-color: #fff;
-    border: none;
-    border-radius: 50%;
-    box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.25);
-}
-
-.side-pane>.del>button:hover {
-    animation: rotate-scale-up 0.9s cubic-bezier(0.35, -0.41, 0.71, 1.58) both;
-}
-
-.side-pane>.del>button:focus {
-    outline: none;
-    border: 0.3rem solid rgba(255, 0, 0, 0.25);
-}
-
-.side-pane>.del>button:active {
-    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.15);
-}
-
 .side-pane>.top {
     display: flex;
     flex-direction: column;
@@ -261,31 +325,6 @@ main {
 }
 
 .side-pane>.top>#name_form>#name:focus {
-    outline: none;
-    border: 0.3rem solid rgba(255, 0, 0, 0.25);
-}
-
-.side-pane>.top>#name_form>button {
-    margin-left: 2rem;
-    width: 5rem;
-    height: 5rem;
-    text-transform: uppercase;
-    background: #fff;
-    border: none;
-    border-radius: 50%;
-    box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.25);
-    letter-spacing: .15rem;
-}
-
-.side-pane>.top>#name_form>button:active {
-    box-shadow: 0px 0px 16px 0px rgba(0, 0, 0, 0.15);
-}
-
-.side-pane>.top>#name_form>button:hover {
-    animation: rotate-scale-up 0.9s cubic-bezier(0.35, -0.41, 0.71, 1.58) both;
-}
-
-.side-pane>.top>#name_form>button:focus {
     outline: none;
     border: 0.3rem solid rgba(255, 0, 0, 0.25);
 }
