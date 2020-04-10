@@ -308,27 +308,28 @@ main {
     flex-direction: row;
     overflow: hidden;
     box-shadow: 0 0 2px rgba(0, 0, 0, 0), 0 -6px 20px rgba(0, 0, 0, .1);
+    height: 100%;
 }
 
-.side-pane>.bottom>.left{
+.side-pane>.bottom>.left {
     display: flex;
     flex-direction: column;
     overflow-y: scroll;
-    width: 37%;
+    width: 41%;
 }
 
 .side-pane>.bottom>.left>.participant-info {
     display: flex;
     background-color: #fff;
-    margin: 1.2rem 3rem;
-    padding: 1.5rem;
-    width: 80%;
+    margin: 1.2rem 2.3rem;
+    padding: .5rem;
+    width: 85%;
     border-radius: 2rem;
     box-shadow: 0px 0px 7px 1px rgba(0, 0, 0, 0.15);
 }
 
 .side-pane>.bottom>.left>.participant-info:nth-child(1) {
-    margin-top: 3rem;
+    margin-top: 2.3rem;
 }
 
 .side-pane>.bottom>.left>.participant-info:hover {
@@ -354,7 +355,7 @@ main {
 .info>.participant-name {
     font-size: 1.4rem;
     font-weight: 700;
-    padding: 0.7rem 0;
+    padding-bottom: 0.5rem;
 }
 
 .info>.participant-score {
