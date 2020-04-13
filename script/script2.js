@@ -1,4 +1,5 @@
 let name_heading = document.querySelector(".top > h2")
+let score_heading = document.querySelector(".top > h3")
 let delete_name = document.querySelector(".del > button")
 let overlay = document.querySelector(".main-pane > .overlay")
 let get_q = document.querySelector(".overlay > .overlay-display > .buttons > .start> button")
@@ -10,8 +11,27 @@ let ques_diff = document.querySelector("#difficulty")
 let ques_type = document.querySelector("#type")
 let ques_amt = document.querySelector("#amount")
 let game_customize = document.querySelector("#game_customizer")
+let templ = getTemplate("connected-user")
+let peer
+let formt = document.querySelector(".bottom>.right>#new_conn")
+let connected_peers_count = 0
+let left = document.querySelector(".bottom>.left")
+
+
+
+function toggle(){
+    if(document.documentElement.getAttribute('data-theme') == 'dark'){
+        document.documentElement.setAttribute('data-theme', 'light');
+        e.target.setAttribute("title","Light Mode")
+    } else{
+        document.documentElement.setAttribute('data-theme', 'dark');
+        e.target.setAttribute("title","Dark Mode")
+    }
+}
 
 game_customize.classList.add("hider")
+left.setAttribute('style','display:none')
+
 fetch("https://opentdb.com/api_category.php").then(data => data.json()).then(json => json.trivia_categories).then(categories => {
     categories.forEach(category => {
         var opt = document.createElement('option');
@@ -24,8 +44,6 @@ fetch("https://opentdb.com/api_category.php").then(data => data.json()).then(jso
     });
 })
 
-console.log(cat_select.value)
-
 overlay.classList.add("inny")
 setTimeout(() => {
     overlay.classList.remove("inny")
@@ -35,6 +53,8 @@ if (localStorage.getItem('User Name') != null) {
     get_q.disabled = false
     warner.setAttribute("style", "display:none")
     name_heading.innerText = localStorage.getItem('User Name')
+    score_heading.innerText = localStorage.getItem('User Score')
+    peering()
 } else {
     name_heading.parentNode.prepend(getTemplate("formmer"))
 }
@@ -91,15 +111,19 @@ function getTemplate(TId) {
     if (!window.templates[TId]) {
         window.templates[TId] = document.querySelector(`template#${TId}`).content
     }
+    // return window.templates[TId].content.cloneNode(true)
     return document.importNode(window.templates[TId], true)
 }
 
 delete_name.addEventListener("click", e => {
     if (localStorage.getItem("User Name") != null) {
-
+        peer.destroy(()=>{
+            console.log("destroyed")
+        })
         name_heading.parentNode.prepend(getTemplate("formmer"))
         localStorage.removeItem("User Name")
         name_heading.innerText = "Enter User Name"
+        score_heading.innerText = "0"
         if (overlay.style.display == "none") {
             overlay.classList.add("inny")
             overlay.setAttribute("style", "display:block")
@@ -108,23 +132,25 @@ delete_name.addEventListener("click", e => {
             warner.setAttribute("style", "display:block")
         }
         get_q.disabled = true
+        formt.querySelector("input[type='submit']").disabled = true
         setTimeout(() => {
             warner.classList.remove("inny3")
             overlay.classList.remove("inny")
             question_answer.innerHTML = ""
-        }, 900)
+            snack("Disconnected")
+        }, 300)
     }
 })
 
 function api_config(e) {
-    if (e.target.classList.contains("rotater")) {
-        e.target.classList.remove("rotater")
-        e.target.classList.add("rotater1")
-    } else {
-        e.target.classList.remove("rotater1")
-        e.target.classList.add("rotater")
-    }
-    setTimeout(()=>{
+    // if (e.target.classList.contains("rotater")) {
+    //     e.target.classList.remove("rotater")
+    //     e.target.classList.add("rotater1")
+    // } else {
+    //     e.target.classList.remove("rotater1")
+    //     e.target.classList.add("rotater")
+    // }
+    setTimeout(() => {
         game_customize.classList.toggle("hider")
         game_customize.classList.add("inny")
         document.querySelectorAll(".remove_on_setting").forEach(el => {
@@ -132,18 +158,18 @@ function api_config(e) {
             el.classList.add("inny")
         })
 
-        setTimeout(()=>{
+        setTimeout(() => {
             game_customize.classList.remove("inny")
             document.querySelectorAll(".remove_on_setting").forEach(el => {
                 el.classList.remove("inny")
             })
-        },900)
+        }, 300)
 
-    },300)
+    }, 300)
 
 }
 
-function finn(e){
+function finn(e) {
 
     overlay.classList.add("inny")
     overlay.setAttribute("style", "display:block")
@@ -152,3 +178,60 @@ function finn(e){
         question_answer.innerHTML = ""
     }, 900)
 }
+
+
+function peering(){
+    peer = new Peer(localStorage.getItem("User Name"));
+    peer.on('open', function(id) {
+        console.log("connected")
+        formt.querySelector("input[type='submit']").disabled = false
+        snack("Connected")
+    });
+
+    peer.on('connection', function(conn) {
+        conn.on('open', () => {
+            connection_basic(conn)
+        });
+    });
+}
+
+function connection_basic(conn){
+    conn.send({
+        name: localStorage.getItem("User Name"),
+        score: localStorage.getItem("User Score")
+    });
+    conn.on('data', function(data) {
+        let temp2 = getTemplate("connected-user")
+        temp2.querySelector(".participant-info > .info >.participant-name").innerText = data.name
+        temp2.querySelector(".participant-info > .info >.participant-score").innerText = data.score
+        left.appendChild(temp2)
+        if(connected_peers_count == 0){
+            left.setAttribute('style','display:flex')
+            connected_peers_count++
+        }
+    });
+}
+
+formt.addEventListener("submit", e => {
+    // debugger
+    let name = e.target.querySelector("#new_conn_name")
+    e.preventDefault()
+
+    let conn = peer.connect(name.value);
+    // on open will be launch when you successfully connect to PeerServer
+    conn.on('open', () => {
+        connection_basic(conn)
+    });
+})
+
+function snack(message) {
+    // Get the snackbar DIV
+    var x = document.querySelector("#snackbar");
+  
+    // Add the "show" class to DIV
+    x.className = "show";
+    x.querySelector("#message").innerText = message
+  
+    // After 3 seconds, remove the show class from DIV
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+  }

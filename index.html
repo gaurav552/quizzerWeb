@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 
 <head>
     <meta charset="UTF-8">
@@ -9,8 +9,8 @@
     <link rel="stylesheet" href="style/additional.css">
     <link rel="stylesheet" href="style/style.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <script defer src="script/script2.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/peerjs@0.3.20/dist/peer.min.js"></script>
+    <script defer src="script/script2.js"></script>
 
 </head>
 
@@ -59,7 +59,7 @@
                             <button disabled>Start</button> 
                         </div>
                         <div class="settings">
-                            <button class="round" onclick="api_config(event)"><span class="material-icons">settings</span></button>
+                            <button class="round-left" onclick="api_config(event)"><span class="material-icons">settings</span></button>
                         </div>
                     </div>
 
@@ -67,7 +67,7 @@
             </div>
 
             <div class="end-attempt">
-                <button class="round" onclick="finn(event)" title="End Attempt">
+                <button class="round-left" onclick="finn(event)" title="End Attempt">
                     <span class="material-icons appear">
                     close
                     </span>
@@ -82,42 +82,47 @@
 
         <aside class="side-pane">
             <div class="del">
-                <button class="round" title="Delete User Name">
+                <button class="round-right" title="Delete User Name">
                     <span class="material-icons appear">
                     delete
                     </span>
                 </button>
             </div>
+            <div class="mode_toggle">
+                <button class="round-right" title="Light Mode" onclick="toggle(event)"></button>
+            </div>
             <div class="top">
+                <!-- <button onclick="snack()">snkc</button> -->
                 <h2>Enter User Name</h2>
-                <h3>100</h3>
+                <h3>0</h3>
             </div>
             <div class="bottom">
                 <div class="left">
-                    <div class="participant-info">
-                        <div class="info">
-                            <h1 class="participant-name">Apple Ball</h1>
-                            <h2 class="participant-score">1234</h2>
-                        </div>
-                    </div>
-                    <div class="participant-info">
-                        <div class="info">
-                            <h1 class="participant-name">Apple Ball</h1>
-                            <h1 class="participant-score">1234</h1>
-                        </div>
-                    </div>
-                    <div class="participant-info">
-                        <div class="info">
-                            <h1 class="participant-name">Apple Ball</h1>
-                            <h1 class="participant-score">1234</h1>
-                        </div>
-                    </div>
+
                 </div>
                 <div class="right">
-                    <h1 style="font-size: 33px;">chatbox or participant summary here</h1>
+                    <h1>Enter UserName to Request Info</h1>
+                    <form id="new_conn">
+                        <!-- <label for="new_conn_name">User ID</label> -->
+                        <input type="text" required id="new_conn_name" name="new_conn_name">
+                        <input type="submit" value="Connect" id="new_conn_connect" disabled>
+                    </form>
                 </div>
             </div>
         </aside>
+
+        <div id="snackbar">
+            <h1 id="message">Test Message</h1>
+        </div>
+
+        <template id="connected-user">
+            <div class="participant-info">
+                <div class="info">
+                    <h1 class="participant-name">Apple Ball</h1>
+                    <h2 class="participant-score">1234</h2>
+                </div>
+            </div>
+        </template>
 
         <template id="trivia">
             <section class="question-no">
@@ -147,9 +152,9 @@
 
         <template id="formmer">
             <form id="name_form" class="inny2">
-                <label for="name">UserName</label>
-                <input type="text" id="name" required value="">
-                <button class="round" type="submit">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" required value="">
+                <button class="round-right" type="submit">
                     <span class="material-icons">
                         save
                     </span>
@@ -161,15 +166,18 @@
                     document.querySelector("#name_form").classList.remove("inny2")
                     e.preventDefault()
                     localStorage.setItem("User Name", document.querySelector("#name_form").querySelector("#name").value)
-                    document.querySelector(".top > h2").innerHTML = localStorage.getItem("User Name")
+                    localStorage.setItem("User Score",0)
+                    name_heading.innerHTML = localStorage.getItem("User Name")
+                    score_heading.innerText = localStorage.getItem('User Score')
                     document.querySelector("#name_form").classList.add("outy2")
                     get_q.disabled = false
                     warner.classList.add("outy3")
+                    peering()
                     setTimeout(() => {
                         warner.classList.remove("outy3")
                         warner.setAttribute("style","display:none")
                         document.querySelector("#name_form").parentNode.removeChild(document.querySelector("#name_form"))
-                    }, 900)
+                    }, 300)
                 })
             </script>
             </form>
