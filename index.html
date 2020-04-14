@@ -2,7 +2,7 @@
 <html lang="en" data-theme="dark">
 
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-16">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Trivia Application</title>
@@ -18,8 +18,21 @@
     <main>
         <div class="main-pane">
 
-            <div class="overlay">
-                
+            <div class="summary-overlay">
+                <div class="summary-display">
+                    <div class="congrats">
+                    </div>
+                    <div class="sum-wrapper">
+                        <div class="summary">
+                        </div>
+                    </div>
+                    <div class="finish">
+                        <button class="btn">Finish Review</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="overlay slideInLeft">
                 <div class="overlay-display">
 
                     <form action="" id="game_customizer" class="game-customize">
@@ -39,7 +52,7 @@
                             </select>
                         </div>
                         <div class="form-input">
-                            <label for="type" >Type</label>
+                            <label for="type">Type</label>
                             <select name="" size="3" id="type">
                                 <option value="">Any</option>
                                 <option value="boolean">True / False </option>
@@ -48,18 +61,15 @@
                         </div>
                         <div class="form-input">
                             <label for="amount">Total Questions</label>
-                            <input type="number" min="5" max="40" id="amount" value="10">
+                            <input type="number" min="1" max="40" id="amount" value="10">
                         </div>
                     </form>
-                    <p class="warner remove_on_setting">
-                        Enter User Name to Start
-                    </p>
                     <div class="buttons">
                         <div class="start remove_on_setting">
-                            <button disabled>Start</button> 
+                            <button class="btn" disabled>Start</button>
                         </div>
                         <div class="settings">
-                            <button class="round-left" onclick="api_config(event)"><span class="material-icons">settings</span></button>
+                            <button class="btn round-left" onclick="api_config(event)"><span class="material-icons">settings</span></button>
                         </div>
                     </div>
 
@@ -67,7 +77,7 @@
             </div>
 
             <div class="end-attempt">
-                <button class="round-left" onclick="finn(event)" title="End Attempt">
+                <button class="btn round-left" onclick="finn(event)" title="End Attempt">
                     <span class="material-icons appear">
                     close
                     </span>
@@ -76,23 +86,24 @@
 
             <div class="qna">
 
+                
             </div>
-
+            <div class="next">
+                <button id="qnext">NEXT</button>
+            </div>
         </div>
 
-        <aside class="side-pane">
+        <aside class="side-pane slideInRight">
             <div class="del">
-                <button class="round-right" title="Delete User Name">
+                <button class="btn round-right" title="Delete User Name">
                     <span class="material-icons appear">
                     delete
                     </span>
                 </button>
             </div>
-            <div class="mode_toggle">
-                <button class="round-right" title="Light Mode" onclick="toggle(event)"></button>
-            </div>
             <div class="top">
-                <!-- <button onclick="snack()">snkc</button> -->
+
+                <!-- <button onclick="anim()">snkc</button> -->
                 <h2>Enter User Name</h2>
                 <h3>0</h3>
             </div>
@@ -101,12 +112,15 @@
 
                 </div>
                 <div class="right">
-                    <h1>Enter UserName to Request Info</h1>
+                    <h1>Enter Friend Name to Request Info</h1>
                     <form id="new_conn">
                         <!-- <label for="new_conn_name">User ID</label> -->
                         <input type="text" required id="new_conn_name" name="new_conn_name">
                         <input type="submit" value="Connect" id="new_conn_connect" disabled>
                     </form>
+                </div>
+                <div class="mode_toggle">
+                    <button class="round-right" title="Light Mode" onclick="toggle(event)"></button>
                 </div>
             </div>
         </aside>
@@ -114,6 +128,27 @@
         <div id="snackbar">
             <h1 id="message">Test Message</h1>
         </div>
+
+        <template id="sum-tem">
+            <div class="summary-q">
+                <div class="sum-q">
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta, excepturi.</p>
+                </div>
+                <div class="sum-ans">
+                    <p class="correct">Lorem ipsum dolor sit amet consectet</p>
+                    <p class="user">Lorem ipsum dolor sit amet consectet</p>
+                </div>
+            </div>
+        </template>
+
+        <template id="end-msg">
+            <h1 class="greet">
+                Congratulations you Scored
+            </h1>
+            <h1 class="final-score">
+                30
+            </h1>
+        </template>
 
         <template id="connected-user">
             <div class="participant-info">
@@ -132,29 +167,20 @@
                 <h1>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eum quod culpa dignissimos optio sunt a, architecto, iure blanditiis ullam delectus nihil quas?</h1>
             </section>
             <div class="answers">
-                <p class="answer" onclick="answer(event)" id="ans1">
-                    Lorem, ipsum.
-                </p>
-                <p class="answer" onclick="answer(event)" id="ans2">
-                    Lorem, ipsum.
-                </p>
-                <p class="answer" onclick="answer(event)" id="ans3">
-                    Lorem, ipsum.
-                </p>
-                <p class="answer" onclick="answer(event)" id="ans4">
-                    Lorem, ipsum.
-                </p>
-            </div>
-            <div class="next">
-                <button id="qnext">NEXT</button>
+
             </div>
         </template>
 
+        <template id="single_answer">
+            <p class="answer" role="button" tabindex="0" onclick="answer(event)" onkeydown="answer(event)">
+            </p>
+        </template>
+
         <template id="formmer">
-            <form id="name_form" class="inny2">
+            <form id="name_form" class="slideInRight">
                 <label for="name">Name</label>
                 <input type="text" id="name" name="name" required value="">
-                <button class="round-right" type="submit">
+                <button class="btn round-right" type="submit">
                     <span class="material-icons">
                         save
                     </span>
@@ -163,21 +189,20 @@
                 
             <script>
                 document.querySelector("#name_form").addEventListener("submit", e => {
-                    document.querySelector("#name_form").classList.remove("inny2")
+                    document.querySelector("#name_form").classList.add("slideOutRight")
                     e.preventDefault()
                     localStorage.setItem("User Name", document.querySelector("#name_form").querySelector("#name").value)
                     localStorage.setItem("User Score",0)
+                    localStorage.setItem("User High Score",0)
                     name_heading.innerHTML = localStorage.getItem("User Name")
-                    score_heading.innerText = localStorage.getItem('User Score')
-                    document.querySelector("#name_form").classList.add("outy2")
+                    score_heading.innerText = localStorage.getItem('User High Score')
+                    
                     get_q.disabled = false
-                    warner.classList.add("outy3")
+                    formt.querySelector("input[type='submit']").disabled = false
                     peering()
                     setTimeout(() => {
-                        warner.classList.remove("outy3")
-                        warner.setAttribute("style","display:none")
                         document.querySelector("#name_form").parentNode.removeChild(document.querySelector("#name_form"))
-                    }, 300)
+                    }, 500)
                 })
             </script>
             </form>
