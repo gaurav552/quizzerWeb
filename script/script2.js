@@ -14,7 +14,7 @@ let templ = getTemplate("connected-user")
 let peer
 let formt = document.querySelector(".bottom>.right>#new_conn")
 let connected_peers_count = 0
-let left = document.querySelector(".bottom>.left")
+let left = document.querySelector(".bottom >.left-overlay>.left")
 let current_question_number = 0
 let user_answers = []
 
@@ -33,7 +33,7 @@ game_customize.setAttribute("style", "display:none")
 game_customize.addEventListener("submit", () => {
     e.preventDefault()
 })
-left.setAttribute('style', 'display:none')
+// left.setAttribute('style', 'display:none')
 document.querySelector(".next").setAttribute("style", "display:none")
 
 fetch("https://opentdb.com/api_category.php").then(data => data.json()).then(json => json.trivia_categories).then(categories => {

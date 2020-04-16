@@ -56,7 +56,6 @@ html {
 
 main {
     display: flex;
-    flex-direction: row;
     width: 100vw;
     background: var(--bg-main);
 }
@@ -331,19 +330,19 @@ option {
     align-items: center;
     flex-wrap: wrap;
     margin: 5rem auto;
-    width: 61.8%;
+    width: 90%;
 }
 
 .main-pane>.qna>.answers>.answer {
     border: none;
     display: flex;
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     justify-content: center;
     align-items: center;
     background: var(--primary-left);
     color: var(--text-primary);
-    height: 12rem;
-    width: 33rem;
+    height: 10rem;
+    width: 28rem;
     margin: 1rem 1rem;
     border-radius: 2rem;
     padding: 2rem;
@@ -396,18 +395,23 @@ option {
 
 .side-pane>.del {
     position: absolute;
-    margin: 3rem 3rem;
+    margin: .5rem;
     /* padding: 1rem 2rem; */
-    z-index: 5;
+    z-index: 4;
 }
 
-.bottom>.mode_toggle {
+.bottom>.buttons>.mode_toggle {
+    /* position: absolute; */
+    /* margin: 3rem 3rem;
+    left: calc(93% - 2rem); */
+}
+
+.bottom> .buttons{
     position: absolute;
-    margin: 3rem 3rem;
-    left: 93%;
+    margin: .5rem;
 }
 
-.bottom>.mode_toggle>button {
+.bottom > .buttons>.mode_toggle>button {
     background: var(--bg-invert);
     box-shadow: 0 .3rem .6rem var(--sec-shadow);
 }
@@ -476,23 +480,6 @@ option {
     font-weight: 400;
 }
 
-.side-pane>.bottom {
-    display: flex;
-    flex-direction: row;
-    overflow: hidden;
-    background: var(--bg-sec);
-    color: var(--text-primary);
-    height: 100%;
-}
-
-.side-pane>.bottom>.left {
-    display: flex;
-    flex-direction: column;
-    overflow-y: scroll;
-    width: 60%;
-    box-shadow: -1rem 0 .9rem var(--sec-shadow);
-}
-
 ::-webkit-scrollbar {
     display: none;
 }
@@ -539,17 +526,47 @@ option {
     box-shadow: 0 .3rem .5rem var(--sec-shadow);
 }
 
-.side-pane>.bottom>.left>.participant-info {
+.side-pane>.bottom {
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+    background: var(--bg-sec);
+    color: var(--text-primary);
+    height: 100%;
+}
+
+/* .side-pane>.bottom>.left {
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    width: 60%;
+    box-shadow: -1rem 0 .9rem var(--sec-shadow);
+} */
+
+.side-pane>.bottom>.left {
+    position: fixed;
+    display: none;
+    width: 38.2%;
+    height: 100%;
+    background: var(--sec-shadow);
+    padding: 2rem;
+}
+
+.side-pane>.bottom>.left > .left-overlay{
+    height: 40rem;
+    overflow-y: scroll;
+}
+
+.side-pane>.bottom>.left > .left-overlay>.participant-info {
     display: flex;
     background-color: var(--bg-main);
     margin: 1.2rem 2.3rem;
     padding: .5rem;
-    width: 90%;
     border-radius: 2rem;
     box-shadow: 0 0 .7rem .1rem rgba(0, 0, 0, 0.15);
 }
 
-.side-pane>.bottom>.left>.participant-info:nth-child(1) {
+.side-pane>.bottom>.left> .left-overlay>.participant-info:nth-child(1) {
     margin-top: 2.3rem;
 }
 
@@ -610,4 +627,88 @@ input[type="submit"]:enabled:hover {
 button:disabled,
 input[type="submit"]:disabled {
     background: var(--bg-alt)!important;
+}
+
+
+body{
+    min-height: 800px;
+}
+
+
+@media screen and (max-width: 1200px) {
+    html {
+        overflow: scroll;
+    }
+
+    ::-webkit-scrollbar {
+        display: block;
+    }
+   main {
+        flex-flow: row wrap;
+    }
+
+    .main-pane {
+        height: 90vh;
+        width: 100%;
+    }
+
+    .main-pane>.qna {
+        padding-top: 6rem;
+    }
+
+    .main-pane>.overlay {
+        position: absolute;
+        width: 100%;
+        height: 92%;
+    }
+
+    .main-pane>.qna>.answers {
+        width: 90%;
+    }
+
+    .side-pane{
+        width: 100%;
+        box-shadow: -1rem 1rem 1rem var(--primary-shadow);
+    }
+
+    .side-pane>.bottom>.left {
+        width: 45%;
+    }
+
+    .main-pane>.summary-overlay {
+        width: 100%;
+    }
+
+}
+
+@media screen and (max-width: 800px){
+
+    .main-pane>.qna>.question>h1 {
+        font-size: 1.7rem;
+    }
+
+    .main-pane>.qna>.question-no>h1 {
+        font-size: 1.4rem;
+    }
+
+    .main-pane>.end-attempt{
+        margin: 1rem;
+    }
+
+    .main-pane>.qna>.answers {
+        margin: 2rem;
+    }
+
+    .main-pane>.qna>.answers>.answer {
+        width: 40%;
+        font-size: 1.1rem;
+        padding: 1rem;
+        height: 7rem;
+    }
+
+    .main-pane>.next>button {
+        font-size: 1.2rem;
+        width: 14rem;
+        height: 4rem;
+    }
 }
