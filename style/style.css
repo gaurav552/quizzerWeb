@@ -659,7 +659,7 @@ body{
     .main-pane>.overlay {
         position: absolute;
         width: 100%;
-        height: 92%;
+        height: 90%;
     }
 
     .main-pane>.qna>.answers {
