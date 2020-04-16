@@ -86,7 +86,7 @@
 
             <div class="qna">
 
-                
+
             </div>
             <div class="next">
                 <button id="qnext">NEXT</button>
@@ -108,7 +108,7 @@
                 <h3>0</h3>
             </div>
             <div class="bottom">
-                <div class="left">
+                <div class="left" style="display: block;">
 
                 </div>
                 <div class="right">
@@ -120,7 +120,7 @@
                     </form>
                 </div>
                 <div class="mode_toggle">
-                    <button class="round-right" title="Light Mode" onclick="toggle(event)"></button>
+                    <button class="btn round-right" title="Light Mode" onclick="toggle(event)"></button>
                 </div>
             </div>
         </aside>
@@ -172,8 +172,8 @@
         </template>
 
         <template id="single_answer">
-            <p class="answer" role="button" tabindex="0" onclick="answer(event)" onkeydown="answer(event)">
-            </p>
+            <button class="answer" onmousedown="answer(event)">
+            </button>
         </template>
 
         <template id="formmer">

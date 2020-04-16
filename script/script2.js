@@ -22,15 +22,15 @@ let user_answers = []
 function toggle(e) {
     if (document.documentElement.getAttribute('data-theme') == 'dark') {
         document.documentElement.setAttribute('data-theme', 'light');
-        e.target.setAttribute("title", "Light Mode")
+        e.target.setAttribute("title", "Dark Mode")
     } else {
         document.documentElement.setAttribute('data-theme', 'dark');
-        e.target.setAttribute("title", "Dark Mode")
+        e.target.setAttribute("title", "Light Mode")
     }
 }
 question_answer.setAttribute("style", "display:none")
 game_customize.setAttribute("style", "display:none")
-game_customize.addEventListener("submit",()=>{
+game_customize.addEventListener("submit", () => {
     e.preventDefault()
 })
 left.setAttribute('style', 'display:none')
@@ -98,7 +98,6 @@ get_q.addEventListener("click", e => {
 
     fetch(question_url).then(data => data.json()).then(json => {
         json.results
-        console.log(JSON.stringify(json.results))
         localStorage.setItem("Questions", JSON.stringify(json.results))
         display_question();
     })
@@ -117,14 +116,18 @@ get_q.addEventListener("click", e => {
 })
 
 function display_question() {
+
     let triviaclone = getTemplate("trivia")
     let question_set = JSON.parse(localStorage.getItem("Questions"))[current_question_number]
 
+
     let current_question = atob(question_set.question)
 
-    triviaclone.querySelector(".question-no > h1").innerText = "Question " + (current_question_number + 1) + " : " + atob(question_set.category)
+    console.log(current_question)
 
-    triviaclone.querySelector(".question > h1").innerText = current_question
+    triviaclone.querySelector(".question-no > h1").innerHTML = "Question " + (current_question_number + 1) + " : " + atob(question_set.category)
+
+    triviaclone.querySelector(".question > h1").innerHTML = current_question
 
     let answers = question_set.incorrect_answers
     answers.push(question_set.correct_answer)
@@ -133,7 +136,7 @@ function display_question() {
 
     answers.forEach(answer => {
         let ans = getTemplate("single_answer")
-        ans.querySelector(".answer").innerText = atob(answer)
+        ans.querySelector(".answer").innerHTML = atob(answer)
         triviaclone.querySelector(".answers").appendChild(ans)
     })
 
@@ -143,7 +146,7 @@ function display_question() {
         question_answer.innerText = ""
         question_answer.classList.add("zoomIn")
         question_answer.append(triviaclone)
-    })
+    }, 500)
 
 
     current_question_number++
@@ -206,7 +209,7 @@ document.querySelector("#qnext").addEventListener("click", e => {
                 }
             }
 
-            console.log(user_answers)
+            // console.log(user_answers)
             document.querySelector(".summary-overlay").setAttribute("style", "display:block")
             document.querySelector(".summary-overlay").classList.add('slideInLeft')
             let msg = getTemplate("end-msg")
@@ -219,7 +222,7 @@ document.querySelector("#qnext").addEventListener("click", e => {
                 let summary_temp = getTemplate("sum-tem")
                 let qstn = atob(q.question)
                 let u_ans = user_answers[i]
-                console.log(u_ans)
+                // console.log(u_ans)
                 summary_temp.querySelector(".summary-q > .sum-q > p").innerHTML = qstn
                 summary_temp.querySelector(".summary-q > .sum-ans > .correct").innerHTML = atob(q.correct_answer)
                 summary_temp.querySelector(".summary-q > .sum-ans > .user").innerHTML = u_ans
@@ -231,10 +234,10 @@ document.querySelector("#qnext").addEventListener("click", e => {
                 document.querySelector(".sum-wrapper > .summary").append(summary_temp)
             })
 
-            setTimeout(()=>{
-                question_answer.setAttribute("style","display:none")
-                overlay.setAttribute("style","display:block")
-            },500)
+            setTimeout(() => {
+                question_answer.setAttribute("style", "display:none")
+                overlay.setAttribute("style", "display:block")
+            }, 500)
 
         }
     } else {
@@ -323,7 +326,7 @@ function finn(e) {
 
     overlay.setAttribute("style", "display:block")
     localStorage.setItem("Questions", "")
-    localStorage.setItem("User Score",0)
+    localStorage.setItem("User Score", 0)
     current_question_number = 0
     user_answers = []
     setTimeout(() => {
@@ -335,18 +338,18 @@ function finn(e) {
 
 document.querySelector(".finish > button").addEventListener("click", e => {
     localStorage.setItem("Questions", "")
-    localStorage.setItem("User Score",0)
+    localStorage.setItem("User Score", 0)
     current_question_number = 0
     user_answers = []
     document.querySelector(".summary-overlay").classList.remove('slideInLeft')
     document.querySelector(".summary-overlay").classList.add("slideOutLeft")
-    setTimeout(()=>{
+    setTimeout(() => {
         score_heading.innerText = localStorage.getItem("User High Score")
         document.querySelector(".summary-overlay").classList.remove("slideOutLeft")
         document.querySelector(".summary-overlay").setAttribute("style", "display:none")
         document.querySelector(".sum-wrapper > .summary").innerText = ""
         document.querySelector(".summary-display>.congrats").innerText = ""
-    },500)
+    }, 500)
 })
 
 
@@ -383,13 +386,13 @@ function peering() {
 function connection_basic(conn) {
     conn.send({
         name: localStorage.getItem("User Name"),
-        score: localStorage.getItem("User Score")
+        score: localStorage.getItem("User High Score")
     });
     conn.on('data', function(data) {
         let temp2 = getTemplate("connected-user")
         temp2.querySelector(".participant-info > .info >.participant-name").innerText = data.name
         temp2.querySelector(".participant-info > .info >.participant-score").innerText = data.score
-        left.appendChild(temp2)
+        left.insertBefore(temp2, left.childNodes[0])
         if (connected_peers_count == 0) {
             left.setAttribute('style', 'display:flex')
             connected_peers_count++
@@ -417,9 +420,9 @@ function snack(message) {
 }
 
 function answer(e) {
-    if (document.querySelector(".answers > .set") != null) {
-        document.querySelector(".answers > .set").classList.remove("set")
-        if (document.querySelector(".answers > .set") != e.target) {
+    if (question_answer.querySelector(".answers > .set") != null) {
+        question_answer.querySelector(".answers > .set").classList.remove("set")
+        if (question_answer.querySelector(".answers > .set") != e.target) {
             e.target.classList.add("set")
         }
     } else {
