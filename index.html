@@ -69,7 +69,7 @@
                             <button class="btn" disabled>Start</button>
                         </div>
                         <div class="settings">
-                            <button class="btn round-left" onclick="api_config(event)"><span class="material-icons">settings</span></button>
+                            <button class="btn round-left"><span class="material-icons">settings</span></button>
                         </div>
                     </div>
 
@@ -77,7 +77,7 @@
             </div>
 
             <div class="end-attempt">
-                <button class="btn round-left" onclick="finn(event)" title="End Attempt">
+                <button class="btn round-left" title="End Attempt">
                     <span class="material-icons appear">
                     close
                     </span>
@@ -110,74 +110,21 @@
             <div class="bottom">
                 <div class="buttons">
                     <div class="mode_toggle">
-                        <button class="btn round-right" title="Light Mode" onclick="toggle(event)"></button>
+                        <button class="btn round-right" title="Light Mode"></button>
                     </div>
                     <div class="friend_toggle">
                         <button class="btn round-right"><span class="material-icons">menu</span></button>
                     </div>
                 </div>
                 <div class="left">
+                    <div class="closer">
+                        <button class="round-right btn">
+                            <span class="material-icons">
+                                close
+                                </span>
+                        </button>
+                    </div>
                     <div class="left-overlay">
-                        <div class="participant-info">
-                            <div class="info">
-                                <h1 class="participant-name">Apple Ball</h1>
-                                <h2 class="participant-score">1234</h2>
-                            </div>
-                        </div>
-                        <div class="participant-info">
-                            <div class="info">
-                                <h1 class="participant-name">Apple Ball</h1>
-                                <h2 class="participant-score">1234</h2>
-                            </div>
-                        </div>
-                        <div class="participant-info">
-                            <div class="info">
-                                <h1 class="participant-name">Apple Ball</h1>
-                                <h2 class="participant-score">1234</h2>
-                            </div>
-                        </div>
-                        <div class="participant-info">
-                            <div class="info">
-                                <h1 class="participant-name">Apple Ball</h1>
-                                <h2 class="participant-score">1234</h2>
-                            </div>
-                        </div>
-                        <div class="participant-info">
-                            <div class="info">
-                                <h1 class="participant-name">Apple Ball</h1>
-                                <h2 class="participant-score">1234</h2>
-                            </div>
-                        </div>
-                        <div class="participant-info">
-                            <div class="info">
-                                <h1 class="participant-name">Apple Ball</h1>
-                                <h2 class="participant-score">1234</h2>
-                            </div>
-                        </div>    
-                        <div class="participant-info">
-                            <div class="info">
-                                <h1 class="participant-name">Apple Ball</h1>
-                                <h2 class="participant-score">1234</h2>
-                            </div>
-                        </div>
-                        <div class="participant-info">
-                            <div class="info">
-                                <h1 class="participant-name">Apple Ball</h1>
-                                <h2 class="participant-score">1234</h2>
-                            </div>
-                        </div>
-                        <div class="participant-info">
-                            <div class="info">
-                                <h1 class="participant-name">Apple Ball</h1>
-                                <h2 class="participant-score">1234</h2>
-                            </div>
-                        </div>
-                        <div class="participant-info">
-                            <div class="info">
-                                <h1 class="participant-name">Apple Ball</h1>
-                                <h2 class="participant-score">1234</h2>
-                            </div>
-                        </div>
                     </div>
                 </div>
                 <div class="right">
@@ -275,7 +222,9 @@
             </form>
         </template>
     </main>
-
+    <script>
+        if('serviceWorker' in navigator) { navigator.serviceWorker.register('sw.js'); }
+    </script>
 </body>
 
 </html>

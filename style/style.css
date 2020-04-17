@@ -56,6 +56,8 @@ html {
 
 main {
     display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100vw;
     background: var(--bg-main);
 }
@@ -548,13 +550,19 @@ option {
     display: none;
     width: 38.2%;
     height: 100%;
-    background: var(--sec-shadow);
+    background: var(--bg-sec);
     padding: 2rem;
 }
-
 .side-pane>.bottom>.left > .left-overlay{
     height: 40rem;
     overflow-y: scroll;
+}
+
+.side-pane>.bottom>.left>.closer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 2rem;
 }
 
 .side-pane>.bottom>.left > .left-overlay>.participant-info {
@@ -595,12 +603,13 @@ option {
 #snackbar {
     visibility: hidden;
     min-width: 20rem;
-    margin-left: -12.5rem;
+    max-width: 20rem;
+    /* margin-left: -12.5rem; */
     background-color: var(--bg-sec);
     color: var(--text-primary);
     text-align: center;
     position: fixed;
-    left: 50%;
+    left: 40%;
     bottom: 3rem;
     z-index: 99;
     border-radius: 4rem;
@@ -609,7 +618,7 @@ option {
 
 #snackbar.show {
     visibility: visible;
-    /* animation: slide-in-up 0.5s, slide-out-down 0.5s 2.5s; */
+    animation: slideInUp .5s ease-in-out,slideOutDown .5s 2.5s ease-in-out;
 }
 
 #snackbar>h1 {
@@ -647,9 +656,12 @@ body{
         flex-flow: row wrap;
     }
 
+
+
     .main-pane {
-        height: 90vh;
+        height: 87vh;
         width: 100%;
+        z-index: 2;
     }
 
     .main-pane>.qna {
@@ -672,11 +684,16 @@ body{
     }
 
     .side-pane>.bottom>.left {
-        width: 45%;
+        width: 100%;
+        top: 50%;
     }
 
     .main-pane>.summary-overlay {
         width: 100%;
+    }
+
+    #snackbar{
+        left: 40%;
     }
 
 }
@@ -685,6 +702,10 @@ body{
 
     .main-pane>.qna>.question>h1 {
         font-size: 1.7rem;
+    }
+
+    #snackbar{
+        left: 30%;
     }
 
     .main-pane>.qna>.question-no>h1 {
