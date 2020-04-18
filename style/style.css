@@ -197,6 +197,7 @@ main {
     justify-content: space-around;
     align-items: center;
     margin: 3rem;
+    flex-wrap: wrap;
 }
 
 .game-customize>.form-input {
@@ -702,6 +703,24 @@ body{
 
     .main-pane>.qna>.question>h1 {
         font-size: 1.7rem;
+    }
+
+    option {
+        padding: 0.3rem .3rem;
+    }
+
+    .game-customize>.form-input {
+        margin: 1rem;
+        font-size: 1.5rem;
+    }
+
+    .game-customize>.form-input>label {
+        margin: 1rem;
+        color: var(--text-primary);
+    }
+
+    .game-customize>.form-input>select, .game-customize>.form-input>input {
+        font-size: 1.5rem;
     }
 
     #snackbar{

@@ -143,11 +143,11 @@ get_q.addEventListener("click", e => {
     } else{
         if(localStorage.getItem("User Answers") != null){
             console.log(localStorage.getItem("User Answers"))
-            user_answers = localStorage.getItem("User Answers").split(",")
+            user_answers = localStorage.getItem("User Answers").split("|")
         } else{
             user_answers = []
         }
-        current_question_number = Number(localStorage.getItem("User Current"))
+        current_question_number = Number(localStorage.getItem("User Current"))-1
         display_question();
         score_heading.innerText = localStorage.getItem("User Score")
         question_answer.setAttribute("style", "display:block")
@@ -225,7 +225,7 @@ document.querySelector("#qnext").addEventListener("click", e => {
         
         if ((current_question_number) <= (JSON.parse(localStorage.getItem("Questions")).length - 1)) {
             user_answers.push(document.querySelector(".set").innerText)
-            localStorage.setItem("User Answers",user_answers)
+            localStorage.setItem("User Answers", user_answers.join("|"))
             let question_set = JSON.parse(localStorage.getItem("Questions"))[current_question_number - 1]
             console.log(question_set)
             if (atob(question_set.correct_answer) == user_answers[current_question_number - 1]) {
@@ -242,7 +242,7 @@ document.querySelector("#qnext").addEventListener("click", e => {
 
         } else {
             user_answers.push(document.querySelector(".set").innerText)
-            localStorage.setItem("User Answers",user_answers)
+            localStorage.setItem("User Answers",user_answers.join("|"))
             let question_set = JSON.parse(localStorage.getItem("Questions"))
             if (atob(question_set[current_question_number - 1].correct_answer) == user_answers[current_question_number - 1]) {
                 let sco = parseInt(localStorage.getItem('User Score'))
@@ -317,12 +317,12 @@ delete_name.addEventListener("click", e => {
         name_heading.parentNode.prepend(getTemplate("formmer"))
         localStorage.removeItem("User Name")
         localStorage.removeItem("Questions")
-        localStorage.removeItem("Questions")
         name_heading.innerText = "Enter User Name"
         score_heading.innerText = "0"
         left.querySelector(".left-overlay").innerHTML = ""
         caches.delete("runtime-1")
         localStorage.removeItem("User Score")
+        localStorage.removeItem("User High Score")
         localStorage.removeItem("User Current")
         localStorage.removeItem("User Answers")
         current_question_number = 0
@@ -382,11 +382,10 @@ document.querySelector(".settings > button").addEventListener("click", e=>{
 
 document.querySelector(".end-attempt >button").addEventListener("click",e => {
 
-    current_question_number = current_question_number-1
     localStorage.setItem("User Current", current_question_number)
     console.log(user_answers.length)
     if(user_answers.length > 0){
-        localStorage.setItem("User Answers",user_answers)
+        localStorage.setItem("User Answers",user_answers.join("|"))
     } else{
         localStorage.removeItem("User Answers")
     }
