@@ -409,12 +409,12 @@ option {
     left: calc(93% - 2rem); */
 }
 
-.bottom> .buttons{
+.bottom>.buttons {
     position: absolute;
     margin: .5rem;
 }
 
-.bottom > .buttons>.mode_toggle>button {
+.bottom>.buttons>.mode_toggle>button {
     background: var(--bg-invert);
     box-shadow: 0 .3rem .6rem var(--sec-shadow);
 }
@@ -538,6 +538,7 @@ option {
     height: 100%;
 }
 
+
 /* .side-pane>.bottom>.left {
     display: flex;
     flex-direction: column;
@@ -554,19 +555,20 @@ option {
     background: var(--bg-sec);
     padding: 2rem;
 }
-.side-pane>.bottom>.left > .left-overlay{
+
+.side-pane>.bottom>.left>.left-overlay {
     height: 40rem;
     overflow-y: scroll;
 }
 
-.side-pane>.bottom>.left>.closer{
+.side-pane>.bottom>.left>.closer {
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 2rem;
 }
 
-.side-pane>.bottom>.left > .left-overlay>.participant-info {
+.side-pane>.bottom>.left>.left-overlay>.participant-info {
     display: flex;
     background-color: var(--bg-main);
     margin: 1.2rem 2.3rem;
@@ -575,7 +577,7 @@ option {
     box-shadow: 0 0 .7rem .1rem rgba(0, 0, 0, 0.15);
 }
 
-.side-pane>.bottom>.left> .left-overlay>.participant-info:nth-child(1) {
+.side-pane>.bottom>.left>.left-overlay>.participant-info:nth-child(1) {
     margin-top: 2.3rem;
 }
 
@@ -619,7 +621,7 @@ option {
 
 #snackbar.show {
     visibility: visible;
-    animation: slideInUp .5s ease-in-out,slideOutDown .5s 2.5s ease-in-out;
+    animation: slideInUp .5s ease-in-out, slideOutDown .5s 2.5s ease-in-out;
 }
 
 #snackbar>h1 {
@@ -639,113 +641,89 @@ input[type="submit"]:disabled {
     background: var(--bg-alt)!important;
 }
 
-
-body{
+body {
     min-height: 800px;
 }
-
 
 @media screen and (max-width: 1200px) {
     html {
         overflow: scroll;
     }
-
-    ::-webkit-scrollbar {
+     ::-webkit-scrollbar {
         display: block;
     }
-   main {
+    main {
         flex-flow: row wrap;
     }
-
-
-
     .main-pane {
         height: 87vh;
         width: 100%;
         z-index: 2;
     }
-
     .main-pane>.qna {
         padding-top: 6rem;
     }
-
     .main-pane>.overlay {
         position: absolute;
         width: 100%;
         height: 90%;
     }
-
     .main-pane>.qna>.answers {
         width: 90%;
     }
-
-    .side-pane{
+    .side-pane {
         width: 100%;
         box-shadow: -1rem 1rem 1rem var(--primary-shadow);
     }
-
     .side-pane>.bottom>.left {
         width: 100%;
         top: 50%;
     }
-
     .main-pane>.summary-overlay {
         width: 100%;
     }
-
-    #snackbar{
+    #snackbar {
         left: 40%;
     }
-
 }
 
-@media screen and (max-width: 800px){
-
+@media screen and (max-width: 800px) {
     .main-pane>.qna>.question>h1 {
         font-size: 1.7rem;
     }
-
     option {
         padding: 0.3rem .3rem;
     }
-
     .game-customize>.form-input {
         margin: 1rem;
         font-size: 1.5rem;
     }
-
     .game-customize>.form-input>label {
         margin: 1rem;
         color: var(--text-primary);
     }
-
-    .game-customize>.form-input>select, .game-customize>.form-input>input {
+    .game-customize>.form-input>select,
+    .game-customize>.form-input>input {
         font-size: 1.5rem;
     }
-
-    #snackbar{
+    #snackbar {
         left: 30%;
     }
-
     .main-pane>.qna>.question-no>h1 {
         font-size: 1.4rem;
     }
-
-    .main-pane>.end-attempt{
+    .main-pane>.end-attempt {
         margin: 1rem;
     }
-
     .main-pane>.qna>.answers {
         margin: 2rem;
     }
-
     .main-pane>.qna>.answers>.answer {
         width: 40%;
         font-size: 1.1rem;
         padding: 1rem;
         height: 7rem;
     }
-
     .main-pane>.next>button {
         font-size: 1.2rem;
         width: 14rem;

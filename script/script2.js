@@ -32,28 +32,28 @@ document.querySelector(".mode_toggle > button").addEventListener("click", e => {
 question_answer.setAttribute("style", "display:none")
 game_customize.setAttribute("style", "display:none")
 game_customize.addEventListener("submit", () => {
-    e.preventDefault()
-})
-// left.setAttribute('style', 'display:none')
+        e.preventDefault()
+    })
+    // left.setAttribute('style', 'display:none')
 
 document.querySelector(".next").setAttribute("style", "display:none")
-if(localStorage.getItem("categories") == "" || localStorage.getItem("categories") == null){
+if (localStorage.getItem("categories") == "" || localStorage.getItem("categories") == null) {
     fetch("https://opentdb.com/api_category.php").then(data => data.json()).then(json => json.trivia_categories).then(categories => {
-        localStorage.setItem("categories",JSON.stringify(categories))
+        localStorage.setItem("categories", JSON.stringify(categories))
         let catgrs = JSON.parse(localStorage.getItem("categories"))
         catgrs.forEach(category => {
-        var opt = document.createElement('option');
-        name = category.name.replace("Entertainment: ", "")
-        name = name.replace("Japanese ", "")
-        name = name.replace("Science: ", "")
-        opt.appendChild(document.createTextNode(name));
-        opt.value = category.id;
-        cat_select.appendChild(opt)
-    });
+            var opt = document.createElement('option');
+            name = category.name.replace("Entertainment: ", "")
+            name = name.replace("Japanese ", "")
+            name = name.replace("Science: ", "")
+            opt.appendChild(document.createTextNode(name));
+            opt.value = category.id;
+            cat_select.appendChild(opt)
+        });
     })
-} else{
-        let catgrs = JSON.parse(localStorage.getItem("categories"))
-        catgrs.forEach(category => {
+} else {
+    let catgrs = JSON.parse(localStorage.getItem("categories"))
+    catgrs.forEach(category => {
         var opt = document.createElement('option');
         name = category.name.replace("Entertainment: ", "")
         name = name.replace("Japanese ", "")
@@ -82,53 +82,53 @@ if (localStorage.getItem('User Name') != null) {
 
 get_q.addEventListener("click", e => {
 
-    if(localStorage.getItem("Questions") == "" || localStorage.getItem("Questions") == null){
-        if(navigator.onLine){
+    if (localStorage.getItem("Questions") == "" || localStorage.getItem("Questions") == null) {
+        if (navigator.onLine) {
             let question_category
             let question_difficulty
             let question_amount
             let question_type
             let question_url
-        
+
             if (cat_select.value != null && cat_select.value != "") {
                 question_category = "&category=" + cat_select.value
             } else {
                 question_category = ""
             }
-        
+
             if (ques_diff.value != null && ques_diff.value != "") {
                 question_difficulty = "&difficulty=" + ques_diff.value
             } else {
                 question_difficulty = ""
             }
-        
+
             if (ques_type.value != null && ques_type.value != "") {
                 question_type = "&type=" + ques_type.value
             } else {
                 question_type = ""
             }
-        
+
             if (ques_amt.value != null && ques_amt.value != "") {
                 question_amount = "amount=" + ques_amt.value
             } else {
                 question_amount = "amount=10"
             }
-        
+
             question_url = "https://opentdb.com/api.php?" + question_amount + question_category + question_type + question_difficulty + "&encode=base64"
-        
-    
+
+
             fetch(question_url).then(data => data.json()).then(json => {
                 json.results
                 localStorage.setItem("Questions", JSON.stringify(json.results))
                 display_question();
             })
-    
+
             localStorage.setItem("User Score", 0)
             current_question_number = 0
             localStorage.setItem("User Current", current_question_number)
             score_heading.innerText = localStorage.getItem("User Score")
             user_answers = []
-        
+
             question_answer.setAttribute("style", "display:block")
                 // question_answer.classList.add("")
             overlay.classList.add("slideOutLeft")
@@ -137,21 +137,21 @@ get_q.addEventListener("click", e => {
                 overlay.classList.remove("slideOutLeft")
                 overlay.setAttribute("style", "display:none")
             }, 500)
-        } else{
+        } else {
             snack("You are offline")
         }
-    } else{
-        if(localStorage.getItem("User Answers") != null){
+    } else {
+        if (localStorage.getItem("User Answers") != null) {
             console.log(localStorage.getItem("User Answers"))
             user_answers = localStorage.getItem("User Answers").split("|")
-        } else{
+        } else {
             user_answers = []
         }
-        current_question_number = Number(localStorage.getItem("User Current"))-1
+        current_question_number = Number(localStorage.getItem("User Current")) - 1
         display_question();
         score_heading.innerText = localStorage.getItem("User Score")
         question_answer.setAttribute("style", "display:block")
-        // question_answer.classList.add("")
+            // question_answer.classList.add("")
         overlay.classList.add("slideOutLeft")
         document.querySelector(".next").setAttribute("style", "display:block")
         setTimeout(() => {
@@ -159,8 +159,6 @@ get_q.addEventListener("click", e => {
             overlay.setAttribute("style", "display:none")
         }, 500)
     }
-
-
 })
 
 function display_question() {
@@ -222,7 +220,7 @@ document.querySelector("#qnext").addEventListener("click", e => {
     console.log(current_question_number + "    " + (JSON.parse(localStorage.getItem("Questions")).length - 1))
 
     if (document.querySelector(".set") !== null) {
-        
+
         if ((current_question_number) <= (JSON.parse(localStorage.getItem("Questions")).length - 1)) {
             user_answers.push(document.querySelector(".set").innerText)
             localStorage.setItem("User Answers", user_answers.join("|"))
@@ -242,7 +240,7 @@ document.querySelector("#qnext").addEventListener("click", e => {
 
         } else {
             user_answers.push(document.querySelector(".set").innerText)
-            localStorage.setItem("User Answers",user_answers.join("|"))
+            localStorage.setItem("User Answers", user_answers.join("|"))
             let question_set = JSON.parse(localStorage.getItem("Questions"))
             if (atob(question_set[current_question_number - 1].correct_answer) == user_answers[current_question_number - 1]) {
                 let sco = parseInt(localStorage.getItem('User Score'))
@@ -268,7 +266,7 @@ document.querySelector("#qnext").addEventListener("click", e => {
                 let summary_temp = getTemplate("sum-tem")
                 let qstn = atob(q.question)
                 let u_ans = user_answers[i]
-                // console.log(u_ans)
+                    // console.log(u_ans)
                 summary_temp.querySelector(".summary-q > .sum-q > p").innerHTML = qstn
                 summary_temp.querySelector(".summary-q > .sum-ans > .correct").innerHTML = atob(q.correct_answer)
                 summary_temp.querySelector(".summary-q > .sum-ans > .user").innerHTML = u_ans
@@ -344,7 +342,7 @@ delete_name.addEventListener("click", e => {
     }
 })
 
-document.querySelector(".settings > button").addEventListener("click", e=>{
+document.querySelector(".settings > button").addEventListener("click", e => {
     if (game_customize.getAttribute("style") == "display:none") {
 
         game_customize.setAttribute("style", "display:flex")
@@ -362,7 +360,7 @@ document.querySelector(".settings > button").addEventListener("click", e=>{
         })
     } else {
         game_customize.classList.add("slideOutLeft")
-        if(localStorage.getItem("Questions") != null || localStorage.getItem("Questions") != ""){
+        if (localStorage.getItem("Questions") != null || localStorage.getItem("Questions") != "") {
             snack("Settings saved for next set")
         }
         document.querySelectorAll(".remove_on_setting").forEach(el => {
@@ -380,13 +378,13 @@ document.querySelector(".settings > button").addEventListener("click", e=>{
 })
 
 
-document.querySelector(".end-attempt >button").addEventListener("click",e => {
+document.querySelector(".end-attempt >button").addEventListener("click", e => {
 
     localStorage.setItem("User Current", current_question_number)
     console.log(user_answers.length)
-    if(user_answers.length > 0){
-        localStorage.setItem("User Answers",user_answers.join("|"))
-    } else{
+    if (user_answers.length > 0) {
+        localStorage.setItem("User Answers", user_answers.join("|"))
+    } else {
         localStorage.removeItem("User Answers")
     }
     overlay.setAttribute("style", "display:block")
@@ -418,35 +416,35 @@ document.querySelector(".finish > button").addEventListener("click", e => {
 })
 
 function peering() {
-    if(navigator.onLine){
+    if (navigator.onLine) {
         peer = new Peer(localStorage.getItem("User Name"));
         peer.on('open', function(id) {
             console.log("connected")
             formt.querySelector("input[type='submit']").disabled = false
             snack("Connected")
         });
-    
+
         peer.on('connection', function(conn) {
             conn.on('open', () => {
                 connection_basic(conn)
             });
         });
-    
+
         peer.on("close", () => {
             console.log("Closed")
             snack("closed")
         })
-    
+
         peer.on('disconnected', () => {
             console.log("disconnected")
             snack("Disconnected")
         });
-    
+
         peer.on('error', (err) => {
             console.log(err.type)
             snack("Error " + err.type)
         });
-    } else{
+    } else {
         snack("You are Offline")
     }
 }
@@ -469,7 +467,7 @@ function connection_basic(conn) {
 }
 
 formt.addEventListener("submit", e => {
-    if(navigator.onLine){
+    if (navigator.onLine) {
         // debugger
         let name = e.target.querySelector("#new_conn_name")
         e.preventDefault()
@@ -479,7 +477,7 @@ formt.addEventListener("submit", e => {
         conn.on('open', () => {
             connection_basic(conn)
         });
-    } else{
+    } else {
         snack("You are Offline")
     }
 
@@ -503,22 +501,22 @@ function answer(e) {
     }
 }
 
-document.querySelector(".friend_toggle > button").addEventListener("click",e => {
-    if(left.querySelector(".left-overlay").childElementCount > 0){
+document.querySelector(".friend_toggle > button").addEventListener("click", e => {
+    if (left.querySelector(".left-overlay").childElementCount > 0) {
         left.classList.add("slideInLeft")
-        left.setAttribute("style","display:block")
-        setTimeout(()=>{
+        left.setAttribute("style", "display:block")
+        setTimeout(() => {
             left.classList.remove("slideInLeft")
-        },500)
-    } else{
+        }, 500)
+    } else {
         snack("No Friends")
     }
 })
 
 document.querySelector(".left > .closer > button").addEventListener("click", e => {
     left.classList.add("slideOutLeft")
-    setTimeout(()=>{
-        left.setAttribute("style","display:none")
+    setTimeout(() => {
+        left.setAttribute("style", "display:none")
         left.classList.remove("slideOutLeft")
-    },500)
+    }, 500)
 })

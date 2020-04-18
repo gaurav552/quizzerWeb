@@ -1,4 +1,4 @@
-const PRE_CACHE = "precache-2"
+const PRE_CACHE = "precache-1"
 const RUNTIME = 'runtime-1';
 
 const CACHE_URL = [
@@ -36,12 +36,12 @@ addEventListener("fetch", e => {
     if (e.request.url.startsWith(self.location.origin) || e.request.url.startsWith("https://opentdb.com/")) {
         e.respondWith(
             caches.match(e.request).then(cacheResponse => {
-                if(cacheResponse){
+                if (cacheResponse) {
                     return cacheResponse
                 }
                 return caches.open(RUNTIME).then(cache => {
                     return fetch(e.request).then(response => {
-                        return cache.put(e.request, response.clone()).then(()=>{
+                        return cache.put(e.request, response.clone()).then(() => {
                             return response;
                         })
                     })
