@@ -429,7 +429,6 @@ option {
 .bottom>.buttons>.mode_toggle>button {
     background: var(--bg-invert);
     box-shadow: 0 .3rem .6rem var(--sec-shadow);
-    color: var(--text-invert);
 }
 
 .round-right {

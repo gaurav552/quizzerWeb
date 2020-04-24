@@ -1,4 +1,4 @@
-const PRE_CACHE = "precache-1"
+const PRE_CACHE = "precache-1.1"
 const RUNTIME = 'runtime-1';
 
 const CACHE_URL = [
@@ -10,16 +10,14 @@ const CACHE_URL = [
 ]
 
 addEventListener('install', e => {
-    console.log("install")
     e.waitUntil(
         caches.open(PRE_CACHE)
         .then(cache => cache.addAll(CACHE_URL))
-        .then(skipWaiting())
+        .then(skipWaiting()) //to be commented
     )
 })
 
 addEventListener("activate", e => {
-    console.log("active")
     const curcache = [PRE_CACHE, RUNTIME]
     e.waitUntil(
         caches.keys().then(cacheNames => {
@@ -28,7 +26,7 @@ addEventListener("activate", e => {
             return Promise.all(cacheToDelete.map(cacheToDelete => {
                 return caches.delete(cacheToDelete)
             }))
-        }).then(self.clients.claim())
+        }).then(self.clients.claim()) //to be commented
     )
 })
 

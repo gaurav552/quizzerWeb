@@ -139,7 +139,6 @@ get_q.addEventListener("click", e => {
         }
     } else {
         if (localStorage.getItem("User Answers") != null) {
-            console.log(localStorage.getItem("User Answers"))
             user_answers = localStorage.getItem("User Answers").split("|")
         } else {
             user_answers = []
@@ -214,7 +213,6 @@ function shuffle(array) {
 
 
 document.querySelector("#qnext").addEventListener("click", e => {
-    console.log(current_question_number + "    " + (JSON.parse(localStorage.getItem("Questions")).length - 1))
 
     if (document.querySelector(".set") !== null) {
 
@@ -222,7 +220,6 @@ document.querySelector("#qnext").addEventListener("click", e => {
             user_answers.push(document.querySelector(".set").innerText)
             localStorage.setItem("User Answers", user_answers.join("|"))
             let question_set = JSON.parse(localStorage.getItem("Questions"))[current_question_number - 1]
-            console.log(question_set)
             if (atob(question_set.correct_answer) == user_answers[current_question_number - 1]) {
                 let sco = parseInt(localStorage.getItem('User Score'))
                 sco = sco + 10
@@ -351,11 +348,11 @@ document.querySelector(".settings > button").addEventListener("click", e => {
                 })
             }, 300)
         })
-        setTimeout(()=>{
+        setTimeout(() => {
             game_customize.setAttribute("style", "display:flex")
             game_customize.classList.add("slideInLeft")
 
-            setTimeout(()=>{
+            setTimeout(() => {
                 game_customize.classList.remove("slideInLeft")
             }, 500)
 
@@ -364,13 +361,13 @@ document.querySelector(".settings > button").addEventListener("click", e => {
     }
 })
 
-document.querySelector(".overlay-display > form >.clickers>button").addEventListener("click",e => {
+document.querySelector(".overlay-display > form >.clickers>button").addEventListener("click", e => {
     game_customize.classList.add("slideOutLeft")
     if (localStorage.getItem("Questions") != null || localStorage.getItem("Questions") != "") {
         snack("Settings saved for next set")
     }
 
-    setTimeout(()=>{
+    setTimeout(() => {
         document.querySelectorAll(".remove_on_setting").forEach(el => {
             el.classList.add("slideInRight")
             el.setAttribute("style", "display:flex")
@@ -384,14 +381,13 @@ document.querySelector(".overlay-display > form >.clickers>button").addEventList
         game_customize.setAttribute("style", "display:none")
         game_customize.classList.remove("slideOutLeft")
 
-    },500)
+    }, 500)
 })
 
 
 document.querySelector(".end-attempt >button").addEventListener("click", e => {
 
     localStorage.setItem("User Current", current_question_number)
-    console.log(user_answers.length)
     if (user_answers.length > 0) {
         localStorage.setItem("User Answers", user_answers.join("|"))
     } else {
