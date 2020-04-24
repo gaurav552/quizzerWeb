@@ -193,6 +193,7 @@ main {
 
 .main-pane>.overlay>.overlay-display>.game-customize {
     display: flex;
+    flex-direction: column;
     width: 100%;
     justify-content: space-around;
     align-items: center;
@@ -200,7 +201,16 @@ main {
     flex-wrap: wrap;
 }
 
-.game-customize>.form-input {
+.game-customize>.inputs {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    align-items: center;
+    margin: 3rem;
+    flex-wrap: wrap;
+}
+
+.game-customize>.inputs>.form-input {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -209,7 +219,7 @@ main {
     margin: 2rem;
 }
 
-.game-customize>.form-input>label {
+.game-customize>.inputs>.form-input>label {
     margin: 2rem;
     color: var(--text-primary);
 }
@@ -225,8 +235,8 @@ input {
     /* width: 20rem; */
 }
 
-.game-customize>.form-input>select,
-.game-customize>.form-input>input {
+.game-customize>.inputs>.form-input>select,
+.game-customize>.inputs>.form-input>input {
     font-size: 2rem;
     box-shadow: 0 .3rem 1rem rgba(0, 0, 0, 0.1);
     border-radius: 2rem;
@@ -242,7 +252,7 @@ option {
     padding: 0.7rem 1rem;
 }
 
-.game-customize>.form-input>input {
+.game-customize>.inputs>.form-input>input {
     transition: all 0.5s ease-in;
 }
 
@@ -400,6 +410,7 @@ option {
     position: absolute;
     margin: .5rem;
     /* padding: 1rem 2rem; */
+    right: 0;
     z-index: 4;
 }
 
@@ -411,12 +422,14 @@ option {
 
 .bottom>.buttons {
     position: absolute;
+    right: 0;
     margin: .5rem;
 }
 
 .bottom>.buttons>.mode_toggle>button {
     background: var(--bg-invert);
     box-shadow: 0 .3rem .6rem var(--sec-shadow);
+    color: var(--text-invert);
 }
 
 .round-right {

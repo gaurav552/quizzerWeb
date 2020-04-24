@@ -9,7 +9,7 @@ let cat_select = document.querySelector("#category")
 let ques_diff = document.querySelector("#difficulty")
 let ques_type = document.querySelector("#type")
 let ques_amt = document.querySelector("#amount")
-let game_customize = document.querySelector("#game_customizer")
+let game_customize = document.querySelector(".overlay-display > #game_customizer")
 let templ = getTemplate("connected-user")
 let peer
 let formt = document.querySelector(".bottom>.right>#new_conn")
@@ -30,11 +30,8 @@ document.querySelector(".mode_toggle > button").addEventListener("click", e => {
 })
 
 question_answer.setAttribute("style", "display:none")
+
 game_customize.setAttribute("style", "display:none")
-game_customize.addEventListener("submit", () => {
-        e.preventDefault()
-    })
-    // left.setAttribute('style', 'display:none')
 
 document.querySelector(".next").setAttribute("style", "display:none")
 if (localStorage.getItem("categories") == "" || localStorage.getItem("categories") == null) {
@@ -345,36 +342,49 @@ delete_name.addEventListener("click", e => {
 document.querySelector(".settings > button").addEventListener("click", e => {
     if (game_customize.getAttribute("style") == "display:none") {
 
-        game_customize.setAttribute("style", "display:flex")
-        game_customize.classList.add("slideInLeft")
-
         document.querySelectorAll(".remove_on_setting").forEach(el => {
-            el.classList.add("zoomOut")
+            el.classList.add("slideOutRight")
             setTimeout(() => {
-                game_customize.classList.remove("slideInLeft")
                 document.querySelectorAll(".remove_on_setting").forEach(el => {
-                    el.classList.remove("zoomOut")
+                    el.classList.remove("slideOutRight")
                     el.setAttribute("style", "display:none")
                 })
-            }, 500)
+            }, 300)
         })
-    } else {
-        game_customize.classList.add("slideOutLeft")
-        if (localStorage.getItem("Questions") != null || localStorage.getItem("Questions") != "") {
-            snack("Settings saved for next set")
-        }
+        setTimeout(()=>{
+            game_customize.setAttribute("style", "display:flex")
+            game_customize.classList.add("slideInLeft")
+
+            setTimeout(()=>{
+                game_customize.classList.remove("slideInLeft")
+            }, 500)
+
+        }, 500)
+
+    }
+})
+
+document.querySelector(".overlay-display > form >.clickers>button").addEventListener("click",e => {
+    game_customize.classList.add("slideOutLeft")
+    if (localStorage.getItem("Questions") != null || localStorage.getItem("Questions") != "") {
+        snack("Settings saved for next set")
+    }
+
+    setTimeout(()=>{
         document.querySelectorAll(".remove_on_setting").forEach(el => {
-            el.classList.add("zoomIn")
+            el.classList.add("slideInRight")
             el.setAttribute("style", "display:flex")
             setTimeout(() => {
-                game_customize.setAttribute("style", "display:none")
-                game_customize.classList.remove("slideOutLeft")
                 document.querySelectorAll(".remove_on_setting").forEach(el => {
-                    el.classList.remove("zoomIn")
+                    el.classList.remove("slideInRight")
                 })
             }, 500)
         })
-    }
+
+        game_customize.setAttribute("style", "display:none")
+        game_customize.classList.remove("slideOutLeft")
+
+    },500)
 })
 
 
