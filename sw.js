@@ -1,4 +1,4 @@
-const PRE_CACHE = "precache-1.1"
+const PRE_CACHE = "precache-1"
 const RUNTIME = 'runtime-1';
 
 const CACHE_URL = [
