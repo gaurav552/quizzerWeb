@@ -473,10 +473,11 @@ function connection_basic(conn) {
 }
 
 formt.addEventListener("submit", e => {
+    e.preventDefault()
     if (navigator.onLine) {
         // debugger
         let name = e.target.querySelector("#new_conn_name")
-        e.preventDefault()
+        // e.preventDefault()
 
         let conn = peer.connect(name.value);
         // on open will be launch when you successfully connect to PeerServer
