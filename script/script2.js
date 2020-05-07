@@ -361,7 +361,7 @@ document.querySelector(".settings > button").addEventListener("click", e => {
     }
 })
 
-document.querySelector(".overlay-display > form >.clickers>button").addEventListener("click", e => {
+document.querySelector(".clickers>button").addEventListener("click", e => {
     game_customize.classList.add("slideOutLeft")
     if (localStorage.getItem("Questions") != null || localStorage.getItem("Questions") != "") {
         snack("Settings saved for next set")
@@ -477,7 +477,7 @@ formt.addEventListener("submit", e => {
     if (navigator.onLine) {
         // debugger
         let name = e.target.querySelector("#new_conn_name")
-        // e.preventDefault()
+            // e.preventDefault()
 
         let conn = peer.connect(name.value);
         // on open will be launch when you successfully connect to PeerServer
