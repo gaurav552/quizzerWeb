@@ -423,7 +423,18 @@ document.querySelector(".finish > button").addEventListener("click", e => {
 
 function peering() {
     if (navigator.onLine) {
-        peer = new Peer(localStorage.getItem("User Name"));
+        peer = new Peer(localStorage.getItem("User Name"), {
+            config: {
+                'iceServers': [
+                    { url: 'stun:stun1.l.google.com:19302' },
+                    {
+                        url: 'turn:numb.viagenie.ca',
+                        credential: 'muazkh',
+                        username: 'webrtc@live.com'
+                    }
+                ]
+            }
+        });
         peer.on('open', function(id) {
             console.log("connected")
             formt.querySelector("input[type='submit']").disabled = false
