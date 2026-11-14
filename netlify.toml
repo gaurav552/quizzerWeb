@@ -1,0 +1,23 @@
+# Production builds deploy the Convex functions, then build the site against them.
+# `convex deploy` sets CONVEX_URL automatically (see --cmd-url-env-var-name). Needs CONVEX_DEPLOY_KEY (a *production*
+# deploy key from the Convex dashboard) in Netlify's environment variables. Node comes from .node-version.
+[build]
+  command = "npx convex deploy --cmd 'npm run build' --cmd-url-env-var-name CONVEX_URL"
+  publish = "dist"
+
+# Deploy previews (pull requests) and branch deploys must not touch the production backend's
+# code, so they only build the site and talk to the production backend as it is.
+# The URL isn't a secret: it ships in the site's JavaScript anyway.
+# TODO after the first production deploy: replace the URL below with the production deployment's
+# (Convex dashboard → quizzerweb → Production → Settings → URL).
+[context.deploy-preview]
+  command = "npm run build"
+
+[context.deploy-preview.environment]
+  CONVEX_URL = "https://REPLACE-WITH-PRODUCTION.convex.cloud"
+
+[context.branch-deploy]
+  command = "npm run build"
+
+[context.branch-deploy.environment]
+  CONVEX_URL = "https://REPLACE-WITH-PRODUCTION.convex.cloud"

@@ -1,0 +1,284 @@
+/*
+ * Quizzer shares the games’ paper: graphite on cool grey, one serif, quiet rules. Colour is kept
+ * for one job, marking an answer right or wrong, and each of those also has an icon.
+ */
+:root {
+  --paper: #edeeec;
+  --sheet: #f7f7f5;
+  --graphite: #22262a;
+  --pencil: #5f656b;
+  --faint: #9aa0a6;
+  --rule: rgba(34, 38, 42, 0.14);
+  --rule-strong: rgba(34, 38, 42, 0.32);
+  --hover: rgba(34, 38, 42, 0.06);
+  --red-pencil: #a44a3f;
+  --field-border: rgba(34, 38, 42, 0.55);
+  --ink: #22262a;
+  --on-ink: #f7f7f5;
+  --highlight: rgba(34, 38, 42, 0.05);
+  --square: #fbfbfa;
+
+  /* Answer feedback: text/icon colour (≥ 4.5:1 on --sheet) and a tint for the option */
+  --right: #3f6e57;
+  --right-tint: #dcebe2;
+  --wrong: #a44a3f;
+  --wrong-tint: #f5dfdb;
+
+  --fs-caption: 12px;
+  --fs-small: 14px;
+  --fs-body: 16px;
+  --fs-h3: 20px;
+  --fs-h2: 25px;
+  --fs-big: 40px;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+
+  --radius-s: 4px;
+  --radius: 6px;
+  --ease: cubic-bezier(0.23, 1, 0.32, 1);
+  color-scheme: light;
+}
+
+[data-theme='dark'] {
+  --paper: #151718;
+  --sheet: #1c1f21;
+  --graphite: #e4e6e7;
+  --pencil: #9ba1a7;
+  --faint: #5f666c;
+  --rule: rgba(255, 255, 255, 0.1);
+  --rule-strong: rgba(255, 255, 255, 0.26);
+  --hover: rgba(255, 255, 255, 0.06);
+  --red-pencil: #b9766b;
+  --field-border: rgba(255, 255, 255, 0.4);
+  --ink: #e4e6e7;
+  --on-ink: #151718;
+  --highlight: rgba(255, 255, 255, 0.07);
+  --square: #202326;
+
+  --right: #a9d6bd;
+  --right-tint: #26392f;
+  --wrong: #eaa597;
+  --wrong-tint: #45302c;
+  color-scheme: dark;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  font-family: 'Literata', Georgia, serif;
+  font-optical-sizing: auto;
+  font-size: var(--fs-body);
+  line-height: 1.5;
+  background: var(--paper);
+  color: var(--graphite);
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+}
+
+#app {
+  min-height: 100%;
+}
+
+button,
+input,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--graphite);
+  outline-offset: 2px;
+}
+
+h1,
+h2,
+h3 {
+  font-weight: 600;
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+.muted {
+  color: var(--pencil);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.num {
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+/* ---------- Buttons: text-first, ink for the one primary action ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: 44px;
+  padding: 0 var(--space-4);
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius);
+  background: transparent;
+  font-weight: 500;
+  cursor: pointer;
+  transition:
+    background-color 0.15s var(--ease),
+    transform 0.1s var(--ease);
+}
+
+.btn:hover:not(:disabled) {
+  background: var(--hover);
+}
+
+.btn:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
+.btn:disabled {
+  cursor: default;
+  opacity: 0.45;
+}
+
+.btn.primary {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--on-ink);
+}
+
+.btn.primary:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--ink) 86%, var(--paper));
+}
+
+.btn.quiet {
+  border-color: transparent;
+}
+
+.btn.icon {
+  width: 44px;
+  padding: 0;
+}
+
+/* Text tabs (difficulty) — active is underlined, not filled */
+/* Buttons carry their own padding; pull the row back so the first label sits on the text edge. */
+.tabs {
+  display: flex;
+  gap: var(--space-1);
+  margin-left: calc(-1 * var(--space-3));
+}
+
+.tabs button {
+  min-height: 44px;
+  padding: 0 var(--space-3);
+  border: none;
+  background: none;
+  color: var(--pencil);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.tabs button:hover {
+  color: var(--graphite);
+}
+
+.tabs button[aria-pressed='true'],
+.tabs button[aria-checked='true'],
+.tabs button[aria-selected='true'] {
+  color: var(--graphite);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 8px;
+}
+
+.tabs button:disabled {
+  cursor: default;
+}
+
+/* ---------- Fields ---------- */
+.field {
+  width: 100%;
+  min-width: 0;
+  height: 44px;
+  padding: 0 var(--space-3);
+  border: 1px solid var(--field-border);
+  border-radius: var(--radius);
+  background: var(--sheet);
+}
+
+.field::placeholder {
+  color: var(--pencil);
+}
+
+.field:focus-visible {
+  outline-offset: 0;
+  border-color: var(--graphite);
+}
+
+.label {
+  font-size: var(--fs-small);
+  color: var(--pencil);
+}
+
+.error {
+  color: var(--red-pencil);
+  font-size: var(--fs-small);
+}
+
+/* Small caps-free section heading */
+.section-title {
+  font-size: var(--fs-small);
+  font-weight: 600;
+  color: var(--pencil);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+.check {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  cursor: pointer;
+}
+
+.check input {
+  width: 18px;
+  height: 18px;
+  margin-top: 3px;
+  accent-color: var(--graphite);
+  flex: none;
+}
